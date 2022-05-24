@@ -4,7 +4,7 @@ public class Platform{
   public Platform(){}
   
   void display(){
-    fill(200);
-    rect(0, 600, 1920, 480);
+    fill(0, 255, 0);
+    rect(0, 900, 1920, 180);
   }
 }
