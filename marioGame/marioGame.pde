@@ -32,11 +32,16 @@ void keyReleased(){
 
 void draw(){
   background(255);
+  textSize(100);
+  fill(0, 0, 255);
+  String lives = "Lives: " + mario.lives;
+  text (lives, 100, 100);
   mario.display();
   mario.move();
   grassPlatform.display();
   for(int i = 0; i < obstacles.size(); i++){
     obstacles.get(i).display();
+    obstacles.check();
   }
   if (keys[0]){
     for (int i = 0; i < obstacles.size(); i++){

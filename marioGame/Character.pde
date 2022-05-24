@@ -16,10 +16,10 @@ public class Character{
       if (yval < 400){
         jump = false;
       }
-      yval*=0.9;
+      yval*=0.95;
     }
     if (yval < 600){
-      yval*=1.05;
+      yval*=1.02;
       if (yval > 600)yval=600;
     }
   }

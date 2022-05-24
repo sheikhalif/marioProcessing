@@ -5,4 +5,6 @@ public class Environment{
   void display(){}
   
   void move(){}
+  
+  void check(){}
 }
