@@ -1,4 +1,4 @@
-public class Spike{
+public class Spike extends Environment{
   PImage skin;
   int x;
  

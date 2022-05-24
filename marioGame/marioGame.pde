@@ -3,14 +3,14 @@ import java.util.*;
 Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
-ArrayList<Spike> spikes = new ArrayList<Spike>();
+ArrayList<Environment> obstacles = new ArrayList<Environment>();
 boolean[] keys = new boolean[]{false, false};
 
 
 void setup(){
   size(1920, 1080);
   Spike spike1 = new Spike(600);
-  spikes.add(spike1);
+  obstacles.add(spike1);
 }
 
 void keyPressed(){
@@ -35,17 +35,17 @@ void draw(){
   mario.display();
   mario.move();
   grassPlatform.display();
-  for(int i = 0; i < spikes.size(); i++){
-    spikes.get(i).display();
+  for(int i = 0; i < obstacles.size(); i++){
+    obstacles.get(i).display();
   }
   if (keys[0]){
-    for (int i = 0; i < spikes.size(); i++){
-      Spike currentSpike = spikes.get(i);
-      if (currentSpike.x < -90){
-        spikes.remove(currentSpike);
+    for (int i = 0; i < obstacles.size(); i++){
+      Environment currentObstacle = obstacles.get(i);
+      if (currentObstacle.x < -90){
+        obstacles.remove(currentObstacle);
       }
       else{
-        currentSpike.move();
+        currentObstacle.move();
       }
     }
   }
