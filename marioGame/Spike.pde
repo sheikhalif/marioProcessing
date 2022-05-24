@@ -18,8 +18,9 @@ public class Spike extends Environment{
   
   void check(){
     if (!(hit)){
-      if (200 > x && 200 < x+190 && mario.yval > 800){
+      if (200 > x && x < 390 && mario.yval > 800){
         if (900-mario.yval < heightAtPoint(x)){
+          println("hit");
           mario.damage();
           hit = true;
         }
