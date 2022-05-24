@@ -14,7 +14,6 @@ void setup(){
 }
 
 void keyPressed(){
-  println(keyCode);
   if (keyCode == 68){
     keys[0] = true;
     
