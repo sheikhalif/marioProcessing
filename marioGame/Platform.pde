@@ -1,4 +1,4 @@
-public class Platform{
+public class Platform extends Environment{
   PImage skin;
  
   public Platform(){}

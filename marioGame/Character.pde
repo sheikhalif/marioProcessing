@@ -5,6 +5,7 @@ public class Character{
   int yval = 600;
   int yvalChange = 10;
   boolean jump = false;
+  int lives = 3;
  
   public Character(){
     speed = 10;
@@ -15,9 +16,12 @@ public class Character{
       if (yval < 400){
         jump = false;
       }
-      yval*=0.9;
+      yval*=0.95;
     }
-    if (yval < 600)yval+=5;
+    if (yval < 600){
+      yval*=1.02;
+      if (yval > 600)yval=600;
+    }
   }
       
  
@@ -29,5 +33,9 @@ public class Character{
  
   void jump(){
     if (yval >= 600)jump = true;
-  }    
+  }
+  
+  void damage(){
+    lives--;
+  }
 }
