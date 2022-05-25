@@ -7,4 +7,6 @@ public class Environment{
   void move(){}
   
   void check(){}
+  
+  void moveOpposite(){}
 }

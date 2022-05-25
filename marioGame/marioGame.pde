@@ -16,7 +16,9 @@ void setup(){
 void keyPressed(){
   if (keyCode == 68){
     keys[0] = true;
-    
+  }
+  if (keyCode == 65){
+    keys[1] = true;
   }
   if (keyCode == 32){
     mario.jump();
@@ -26,6 +28,9 @@ void keyPressed(){
 void keyReleased(){
   if (keyCode == 68){
     keys[0] = false;
+  }
+  if (keyCode == 65){
+    keys[1] = false;
   }
 }
 
@@ -43,10 +48,21 @@ void draw(){
     for (int i = 0; i < obstacles.size(); i++){
       Environment currentObstacle = obstacles.get(i);
       if (currentObstacle.x < -90){
-        obstacles.remove(currentObstacle);
+        //obstacles.remove(currentObstacle);
       }
       else{
         currentObstacle.move();
+      }
+    }
+  }
+  if (keys[1]){
+    for (int i = 0; i < obstacles.size(); i++){
+      Environment currentObstacle = obstacles.get(i);
+      if (currentObstacle.x < -90){
+        obstacles.remove(currentObstacle);
+      }
+      else{
+        currentObstacle.moveOpposite();
       }
     }
   }

@@ -16,11 +16,14 @@ public class Spike extends Environment{
     x-=speed;
   }
   
+  void moveOpposite(){
+    x+=speed;
+  }
+  
   void check(){
     if (!(hit)){
-      if (200 > x && mario.yval+300 > 800){
+      if (200 > x && x > 10 && mario.yval+300 > 800){
         if (900-mario.yval-300 <= heightAtPoint(200)){
-          println("hit");
           mario.damage();
           hit = true;
         }
