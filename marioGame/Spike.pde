@@ -1,6 +1,5 @@
 public class Spike extends Environment{
   PImage skin;
-  int x;
   boolean hit = false;
  
   public Spike(int x__){
