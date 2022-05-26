@@ -23,13 +23,13 @@ public class spikedBall extends Environment{
     triangle(x+150, 874, x+200, 862, x+150, 850);
     triangle(x+150, 850, x+200, 837, x+150, 824);
     triangle(x+150, 824, x+200, 812, x+150, 800);
+    if (checkInFront()){
+      x-=speed;
+    }
   }
  
   void move(){
-    if (checkInFront){
-      move-=speed;
-    }
-    move-=speed;
+    x-=speed;
   }
  
   void check(){
@@ -43,9 +43,12 @@ public class spikedBall extends Environment{
  
   boolean checkInFront(){
   for (int i = 0; i < obstacles.size(); i++){
-    if (obstacles.get(i).x < x){
+    println("Obstacle x: " + obstacles.get(i).getX());
+    println("My x: " + x);
+    if (obstacles.get(i).getX() > 0 && obstacles.get(i).getX() < x){
       return false;
     }
   }
   return true;
+  }
 }

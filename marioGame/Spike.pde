@@ -10,6 +10,7 @@ public class Spike extends Environment{
   void display(){
     fill(150);
     triangle(x, 900, x+45, 800, x+90, 900);
+    println("Spike x: " + x);
   }
  
   void move(){
