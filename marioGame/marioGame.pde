@@ -11,8 +11,11 @@ void setup(){
   size(1920, 1080);
   Spike spike1 = new Spike(600);
   obstacles.add(spike1);
-  spikedBall spikedBall1 = new spikedBall(1300);
+  spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
+  for (int i = 0; i < obstacles.size(); i++){
+    println(obstacles.get(i).getX());
+  }
 }
 
 void keyPressed(){

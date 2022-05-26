@@ -1,6 +1,5 @@
 public class spikedBall extends Environment{
   PImage skin;
-  int x;
   boolean hit = false;
  
   public spikedBall(int x__){
@@ -24,7 +23,7 @@ public class spikedBall extends Environment{
     triangle(x+150, 850, x+200, 837, x+150, 824);
     triangle(x+150, 824, x+200, 812, x+150, 800);
     if (checkInFront()){
-      x-=speed;
+      x-=speed*0.4;
     }
   }
  
@@ -34,17 +33,27 @@ public class spikedBall extends Environment{
  
   void check(){
     if (!(hit)){
-      if (x < 200 && x > -100 && mario.yval+300 > 750){
-        mario.damage();
-        hit = true;
+      if (x < 200 && x > -100){
+        if (mario.yval+300 > 800){
+          mario.damage();
+          hit = true;
+        }
+        if (x < 150 && x > -50){
+          if (mario.yval+300 > 750 && mario.yval+300 < 800){
+            mario.damage();
+            hit = true;
+          }
+        }
       }
     }      
   }
+  
+  
  
   boolean checkInFront(){
   for (int i = 0; i < obstacles.size(); i++){
-    println("Obstacle x: " + obstacles.get(i).getX());
-    println("My x: " + x);
+    //println("Obstacle x: " + obstacles.get(i).getX());
+    //println("My x: " + x);
     if (obstacles.get(i).getX() > 0 && obstacles.get(i).getX() < x){
       return false;
     }
