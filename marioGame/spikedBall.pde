@@ -38,7 +38,7 @@ public class spikedBall extends Environment{
           mario.damage();
           hit = true;
         }
-        if (x < 150 && x > -50){
+        if (x < 140 && x > -30){
           if (mario.yval+300 > 750 && mario.yval+300 < 800){
             mario.damage();
             hit = true;
