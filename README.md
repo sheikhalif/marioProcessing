@@ -10,4 +10,5 @@ Project description: My final project will be an enhanced version of the classic
   
 DEVELOPMENT LOG  
 5/23 : wrote basic Character class, Platform class, and Spike class. Screen moves to the right and started working on jump mechanics  
-5/24 : started working on collision detection and implemented lives system
+5/24 : started working on collision detection and implemented lives system  
+5/25 : finished jump mechanics for spikes  
