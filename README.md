@@ -13,3 +13,4 @@ DEVELOPMENT LOG
 5/24 : started working on collision detection and implemented lives system   
 5/25 : finished jump mechanics for spikes  
 5/26 : finished collision mechanics and movement for spiked balls  
+5/28 : added aesthetic features like a light blue background and started a new parent class backgroundItems with two child classes, the background class and a tree class. There will be two more background features, rocks and clouds.  
