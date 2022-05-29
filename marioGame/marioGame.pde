@@ -1,9 +1,13 @@
 import java.util.*;
+import java.lang.*;
 
 Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
 ArrayList<Environment> obstacles = new ArrayList<Environment>();
+ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
+int backgroundObjectStartX = 600;
+  
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
 
@@ -14,8 +18,11 @@ void setup(){
   obstacles.add(spike1);
   spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
-  for (int i = 0; i < obstacles.size(); i++){
-    println(obstacles.get(i).getX());
+  for (int i = 0; i < 100; i++){
+    int rng1 = (int)(Math.random() * 3);
+    int rng2 = 1000 + (int)(Math.random() * 201);
+    backgroundObjects.add(new Tree(backgroundObjectStartX));
+    backgroundObjectStartX+=rng2;
   }
 }
 
@@ -42,6 +49,9 @@ void keyReleased(){
 
 void draw(){
   theBackground.display();
+  for(int i = 0; i < backgroundObjects.size(); i++){
+    backgroundObjects.get(i).display();
+  }
   String lives = "Lives: " + mario.lives;
   mario.display();
   mario.move();
@@ -59,6 +69,9 @@ void draw(){
       else{
         currentObstacle.move();
       }
+    }
+    for (int i = 0; i < backgroundObjects.size(); i++){
+      backgroundObjects.get(i).move();
     }
   }
   if (keys[1]){

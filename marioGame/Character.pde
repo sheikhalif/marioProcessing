@@ -27,7 +27,6 @@ public class Character{
       
  
   void display(){
-    theBackground.display();
     fill(c);
     rect(100, yval, 100, 300);
     c = color(0, 0, 0);
