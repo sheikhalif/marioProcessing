@@ -19,8 +19,9 @@ void setup(){
   spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
   for (int i = 0; i < 100; i++){
-    int rng1 = (int)(Math.random() * 3);
+    int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
+    backgroundObjects.add(new Cloud(backgroundObjectStartX+10));
     if (rng1 == 0){
       backgroundObjects.add(new Rock(backgroundObjectStartX));
     }
@@ -77,6 +78,9 @@ void draw(){
     }
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
+      if (backgroundObjects.get(i).x < -300){
+        backgroundObjects.remove(i);
+      }
     }
   }
   if (keys[1]){
