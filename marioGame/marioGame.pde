@@ -20,8 +20,13 @@ void setup(){
   obstacles.add(spikedBall1);
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 3);
-    int rng2 = 1000 + (int)(Math.random() * 201);
-    backgroundObjects.add(new Tree(backgroundObjectStartX));
+    int rng2 = 700 + (int)(Math.random() * 201);
+    if (rng1 == 0){
+      backgroundObjects.add(new Rock(backgroundObjectStartX));
+    }
+    else if (rng1 == 1){
+      backgroundObjects.add(new Tree(backgroundObjectStartX));
+    }
     backgroundObjectStartX+=rng2;
   }
 }
