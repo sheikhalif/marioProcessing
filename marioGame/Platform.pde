@@ -1,4 +1,4 @@
-public class Platform extends Environment{
+public class Platform extends backgroundItems{
   PImage skin;
  
   public Platform(){}

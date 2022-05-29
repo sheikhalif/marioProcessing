@@ -4,6 +4,7 @@ Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
 ArrayList<Environment> obstacles = new ArrayList<Environment>();
+Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
 
 
@@ -40,7 +41,7 @@ void keyReleased(){
 }
 
 void draw(){
-  background(255);
+  theBackground.display();
   String lives = "Lives: " + mario.lives;
   mario.display();
   mario.move();
