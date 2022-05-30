@@ -14,6 +14,7 @@ boolean[] keys = new boolean[]{false, false};
 
 void setup(){
   size(1920, 1080);
+  obstacles.add(new killerBird());
   Spike spike1 = new Spike(600);
   obstacles.add(spike1);
   spikedBall spikedBall1 = new spikedBall(1800);
