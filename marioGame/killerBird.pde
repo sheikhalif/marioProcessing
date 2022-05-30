@@ -1,22 +1,61 @@
 public class killerBird extends Environment{
   int x;
   int y;
+  int centerY = 200;
+  int attackX;
+  int attackY;
+  boolean stabilizeMode = true;
   boolean movementMode = true; //true = right to left , false = left to right
   boolean flapMode = true; //true = top to bottom, false = bottom to top
+  boolean attackMode = false;
+  int countdown = 300;
+  boolean hit = false;
+  color c = color(0, 0, 0);
   public killerBird(){
     x = 1000;
     y = 170;
   }
   
   void display(){
+    if (countdown > 0)countdown--;
+    if (countdown == 0)attackMode = true;
     strokeWeight(20);
-    stroke(0);
-    line (x, 200, x-40, y);
-    line (x, 200, x+40, y);
-    changeY();
-    move();
+    stroke(c);
+    line (x, centerY, x-40, y);
+    line (x, centerY, x+40, y);
+    if (attackMode == false){
+      changeY();
+      move();
+    }
+    else if (attackMode == true){
+      c = color(255, 0, 0);
+      if (y > 170 && stabilizeMode){
+        y-=2;
+      }
+      else{
+        stabilizeMode = false;
+        if (y >= 170){
+          attackX = x;
+          attackY = y;
+        }
+        attack();
+        //check();
+      }
+    }
+      
     noStroke();
+    
   }
+  
+  void attack(){
+    int incrementX = (attackX + 200) / 60;
+    int incrementY = (860 - attackY) / 40;
+    x-=incrementX;
+    centerY+=incrementY;
+    y += incrementY;
+  }
+    
+    
   
   void changeY(){
     if (flapMode){
