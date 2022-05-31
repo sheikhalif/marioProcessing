@@ -8,7 +8,7 @@ public class killerBird extends Environment{
   boolean movementMode = true; //true = right to left , false = left to right
   boolean flapMode = true; //true = top to bottom, false = bottom to top
   boolean attackMode = false;
-  int countdown = 400;
+  int countdown = 660;
   boolean hit = false;
   color c = color(0, 0, 0);
   public killerBird(){
@@ -49,7 +49,7 @@ public class killerBird extends Environment{
   
   void attack(){
     int incrementX = (attackX + 200) / 60;
-    int incrementY = (860 - attackY) / 55;
+    int incrementY = (860 - attackY) / 50;
     x-=incrementX;
     centerY+=incrementY;
     y += incrementY;
