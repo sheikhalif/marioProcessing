@@ -20,6 +20,7 @@ void setup(){
   spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
   obstacles.add(new Pitfall(2500));
+  obstacles.add(new poisonTrap(3200));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);

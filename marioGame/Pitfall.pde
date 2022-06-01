@@ -20,7 +20,7 @@ public class Pitfall extends Traps{
   }
   
   void check(){
-    if (x < 100 && x > -300 && (mario.yval+300)>=880){
+    if (x < 100 && x > -200 && (mario.yval+300)>=880){
       mario.trapped = true;
       keys[0] = false;
       mario.yval*=1.02;
