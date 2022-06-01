@@ -8,11 +8,11 @@ public class killerBird extends Environment{
   boolean movementMode = true; //true = right to left , false = left to right
   boolean flapMode = true; //true = top to bottom, false = bottom to top
   boolean attackMode = false;
-  int countdown = 660;
+  int countdown = 760;
   boolean hit = false;
   color c = color(0, 0, 0);
   public killerBird(){
-    x = 1000;
+    x = 2000;
     y = 170;
   }
   
@@ -39,13 +39,21 @@ public class killerBird extends Environment{
           attackY = y;
         }
         attack();
-        //check();
+        check();
       }
     }
       
     noStroke();
     
   }
+  
+  void check(){
+    if (!(hit) && x < 240 && mario.yval+300 < centerY && mario.yval+300 > y){
+      mario.damage();
+      hit = true;
+    }
+  }
+    
   
   void attack(){
     int incrementX = (attackX + 200) / 60;
