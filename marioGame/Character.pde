@@ -7,6 +7,7 @@ public class Character{
   boolean jump = false;
   int lives = 3;
   color c;
+  boolean trapped = false;
  
   public Character(){
     speed = 10;
@@ -19,7 +20,7 @@ public class Character{
       }
       yval*=0.93;
     }
-    if (yval < 600){
+    if (!(trapped) && yval < 600){
       yval*=1.02;
       if (yval > 600)yval=600;
     }
