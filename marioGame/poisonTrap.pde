@@ -1,5 +1,6 @@
 public class poisonTrap extends Traps{
   int x;
+  boolean hit = false;
   
   public poisonTrap(int x__){
     x = x__;
@@ -40,11 +41,21 @@ public class poisonTrap extends Traps{
     rect(x+240, 1000, 10, 10);
     rect(x+270, 1060, 10, 10);
     rect(x+290, 1040, 10, 10);
+    check();
     
   }
   
   void move(){
     x-=speed;
+  }
+  
+  void check(){
+    if (!(hit) && mario.yval+300 >= 900 && x < 200 && x > -100){
+      mario.damage();
+      mario.paranoiaCountdown = 600;
+      mario.paranoia();
+      hit = true;
+    }
   }
 }
     

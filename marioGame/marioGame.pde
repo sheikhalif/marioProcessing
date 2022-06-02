@@ -57,6 +57,10 @@ void keyReleased(){
 }
 
 void draw(){
+  if (mario.paranoiaCountdown > 0){
+    scale(1.5);
+    translate(0, -300);
+  }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
     backgroundObjects.get(i).display();
@@ -66,8 +70,11 @@ void draw(){
   mario.move();
   grassPlatform.display();
   for(int i = 0; i < obstacles.size(); i++){
-    obstacles.get(i).display();
-    obstacles.get(i).check();
+    if (obstacles.get(i).x < 2500){
+      obstacles.get(i).display();
+      obstacles.get(i).check();
+    }
+    
   }
   if (keys[0]){
     for (int i = 0; i < obstacles.size(); i++){
@@ -97,6 +104,7 @@ void draw(){
       }
     }
   }
+
   fill(0);
   textSize(50);
   text (lives, 20, 50);
