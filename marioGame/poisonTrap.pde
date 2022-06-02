@@ -53,7 +53,6 @@ public class poisonTrap extends Traps{
     if (!(hit) && mario.yval+300 >= 900 && x < 200 && x > -100){
       mario.damage();
       mario.paranoiaCountdown = 600;
-      mario.paranoia();
       hit = true;
     }
   }

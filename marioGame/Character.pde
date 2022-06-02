@@ -43,10 +43,4 @@ public class Character{
     lives--;
     c = color(255, 0, 0);
   }
-  
-  void paranoia(){
-    if (mario.paranoiaCountdown > 0){
-      mario.paranoiaCountdown--;
-    }
-  } 
 }

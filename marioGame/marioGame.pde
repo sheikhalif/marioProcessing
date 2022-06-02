@@ -60,6 +60,7 @@ void draw(){
   if (mario.paranoiaCountdown > 0){
     scale(1.5);
     translate(0, -300);
+    mario.paranoiaCountdown--;
   }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
