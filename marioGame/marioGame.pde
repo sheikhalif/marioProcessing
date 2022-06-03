@@ -23,10 +23,11 @@ void setup(){
   spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
   obstacles.add(new Pitfall(2500));
-  obstacles.add(new poisonTrap(3200));
-  obstacles.add(new Spike(3900));
-  obstacles.add(new Spike(4600));
-  obstacles.add(new spikedBall(6000));
+  //obstacles.add(new poisonTrap(3200));
+  //obstacles.add(new Spike(3900));
+  //obstacles.add(new Spike(4600));
+  //obstacles.add(new spikedBall(6000));
+  obstacles.add(new doubleJump(3500));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);

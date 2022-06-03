@@ -9,7 +9,9 @@ public class Character{
   color c;
   boolean trapped = false;
   int paranoiaCountdown = 0;
-  
+  int doubleJumpCountdown = 0;
+  int invincibilityCountdown = 0;
+
  
   public Character(){
   }
