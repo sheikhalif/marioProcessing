@@ -53,6 +53,9 @@ void keyPressed(){
     mario.jump();
     if (mario.doubleJumpCountdown > 0){
       mario.doubleJumpCounter++;
+      if (mario.doubleJumpCounter == 2){
+        mario.secondJumpStart = mario.yval;
+      }
     }
   }
 }
