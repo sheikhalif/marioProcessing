@@ -31,6 +31,7 @@ public class Character{
   void display(){
     fill(c);
     rect(100, yval, 100, 300);
+    image(marioSkin1, 100, yval);
     c = color(0, 0, 0);
   }
  
