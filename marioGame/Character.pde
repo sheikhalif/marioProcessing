@@ -1,6 +1,6 @@
 public class Character{
   PImage skin;
-  int speed;
+  int speed = 10;
   int jumpForce=20;
   int yval = 600;
   int yvalChange = 10;
@@ -12,7 +12,6 @@ public class Character{
   
  
   public Character(){
-    speed = 10;
   }
  
   void move(){

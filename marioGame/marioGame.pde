@@ -7,6 +7,7 @@ int speed = mario.speed;
 ArrayList<Environment> obstacles = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
+float scale = 1;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -21,6 +22,9 @@ void setup(){
   obstacles.add(spikedBall1);
   obstacles.add(new Pitfall(2500));
   obstacles.add(new poisonTrap(3200));
+  obstacles.add(new Spike(3700));
+  obstacles.add(new Spike(4100));
+  obstacles.add(new spikedBall(4800));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -58,9 +62,17 @@ void keyReleased(){
 
 void draw(){
   if (mario.paranoiaCountdown > 0){
-    scale(1.5);
-    translate(0, -300);
+    speed = 7;
+    scale(scale);
+    if (scale < 1.5){
+      scale = scale*1.02;
+    }
+    translate(0, -200*scale);
     mario.paranoiaCountdown--;
+    if (mario.paranoiaCountdown == 0){
+      scale = 1;
+      speed = 10;
+    }
   }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
