@@ -22,9 +22,9 @@ void setup(){
   obstacles.add(spikedBall1);
   obstacles.add(new Pitfall(2500));
   obstacles.add(new poisonTrap(3200));
-  obstacles.add(new Spike(3700));
-  obstacles.add(new Spike(4100));
-  obstacles.add(new spikedBall(4800));
+  obstacles.add(new Spike(3900));
+  obstacles.add(new Spike(4600));
+  obstacles.add(new spikedBall(6000));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -62,7 +62,7 @@ void keyReleased(){
 
 void draw(){
   if (mario.paranoiaCountdown > 0){
-    speed = 7;
+    speed = 8;
     scale(scale);
     if (scale < 1.5){
       scale = scale*1.02;
@@ -71,7 +71,7 @@ void draw(){
     mario.paranoiaCountdown--;
     if (mario.paranoiaCountdown == 0){
       scale = 1;
-      speed = 10;
+      speed = mario.speed;
     }
   }
   theBackground.display();
@@ -106,19 +106,14 @@ void draw(){
       }
     }
   }
-  if (keys[1]){
-    for (int i = 0; i < obstacles.size(); i++){
-      Environment currentObstacle = obstacles.get(i);
-      if (currentObstacle.x < -90){
-        obstacles.remove(currentObstacle);
-      }
-      else{
-        currentObstacle.moveOpposite();
-      }
-    }
-  }
 
   fill(0);
   textSize(50);
-  text (lives, 20, 50);
+  if (mario.paranoiaCountdown == 0){
+    text (lives, 20, 50);
+  }
+  else{
+    textSize(35);
+    text(lives, 20, 350);
+  }
 }
