@@ -16,4 +16,5 @@ DEVELOPMENT LOG
 5/28 : added aesthetic features like a light blue background and started a new parent class backgroundItems with two child classes, the background class and a tree class. There will be two more background features, rocks and clouds.  
 5/29 : added random rocks and clouds  
 5/30 : worked on killerBird class with normal flight mode and attack mode  
-5/31 : worked on pitfall trap and got it's display, move, and check functions working  
+5/31 : worked on pitfall trap and got it's display, move, and check functions working 
+6/2 : finished poisonTrap class and all functions assoiciated  
