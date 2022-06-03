@@ -7,6 +7,7 @@ int speed = mario.speed;
 ArrayList<Environment> obstacles = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
+float scale = 1;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -20,6 +21,10 @@ void setup(){
   spikedBall spikedBall1 = new spikedBall(1800);
   obstacles.add(spikedBall1);
   obstacles.add(new Pitfall(2500));
+  obstacles.add(new poisonTrap(3200));
+  obstacles.add(new Spike(3900));
+  obstacles.add(new Spike(4600));
+  obstacles.add(new spikedBall(6000));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -56,6 +61,19 @@ void keyReleased(){
 }
 
 void draw(){
+  if (mario.paranoiaCountdown > 0){
+    speed = 8;
+    scale(scale);
+    if (scale < 1.5){
+      scale = scale*1.02;
+    }
+    translate(0, -200*scale);
+    mario.paranoiaCountdown--;
+    if (mario.paranoiaCountdown == 0){
+      scale = 1;
+      speed = mario.speed;
+    }
+  }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
     backgroundObjects.get(i).display();
@@ -65,8 +83,11 @@ void draw(){
   mario.move();
   grassPlatform.display();
   for(int i = 0; i < obstacles.size(); i++){
-    obstacles.get(i).display();
-    obstacles.get(i).check();
+    if (obstacles.get(i).x < 2500){
+      obstacles.get(i).display();
+      obstacles.get(i).check();
+    }
+    
   }
   if (keys[0]){
     for (int i = 0; i < obstacles.size(); i++){
@@ -85,18 +106,14 @@ void draw(){
       }
     }
   }
-  if (keys[1]){
-    for (int i = 0; i < obstacles.size(); i++){
-      Environment currentObstacle = obstacles.get(i);
-      if (currentObstacle.x < -90){
-        obstacles.remove(currentObstacle);
-      }
-      else{
-        currentObstacle.moveOpposite();
-      }
-    }
-  }
+
   fill(0);
   textSize(50);
-  text (lives, 20, 50);
+  if (mario.paranoiaCountdown == 0){
+    text (lives, 20, 50);
+  }
+  else{
+    textSize(35);
+    text(lives, 20, 350);
+  }
 }

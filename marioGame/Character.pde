@@ -1,6 +1,6 @@
 public class Character{
   PImage skin;
-  int speed;
+  int speed = 15;
   int jumpForce=20;
   int yval = 600;
   int yvalChange = 10;
@@ -8,9 +8,10 @@ public class Character{
   int lives = 3;
   color c;
   boolean trapped = false;
+  int paranoiaCountdown = 0;
+  
  
   public Character(){
-    speed = 10;
   }
  
   void move(){
