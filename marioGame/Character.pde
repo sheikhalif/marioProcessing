@@ -11,13 +11,24 @@ public class Character{
   int paranoiaCountdown = 0;
   int doubleJumpCountdown = 0;
   int invincibilityCountdown = 0;
+  boolean doubleJump = false;
+  int doubleJumpCounter = 0;
 
  
   public Character(){
   }
  
   void move(){
-    if (jump){
+    if (doubleJump){
+      if (doubleJumpCounter < 2){
+        yval *= 0.93;
+      }
+      if (doubleJumpCounter == 2){
+        doubleJump = false;
+        doubleJumpCounter = 0;
+      }
+    }
+    else if (jump){
       if (yval < 350){
         jump = false;
       }
@@ -38,8 +49,10 @@ public class Character{
   }
  
   void jump(){
-    if (yval >= 600)jump = true;
+    if (yval >= 300 && doubleJumpCountdown > 0)doubleJump = true;
+    else if (yval >= 600)jump = true;
   }
+    
   
   void damage(){
     lives--;

@@ -51,6 +51,9 @@ void keyPressed(){
   }
   if (keyCode == 32){
     mario.jump();
+    if (mario.doubleJumpCountdown > 0){
+      mario.doubleJumpCounter++;
+    }
   }
 }
 
