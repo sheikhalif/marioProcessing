@@ -20,3 +20,5 @@ DEVELOPMENT LOG
 6/2 : finished poisonTrap class and all functions assoiciated   
 6/3 : wrote display, move, and check functions for doubleJump powerup; made skin for mario  
 6/4 : wrote invincibility mode, all game features are done, time for menu, level design, and aesthetic changes  
+6/5 : designed main menu  
+
