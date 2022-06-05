@@ -8,7 +8,11 @@ ArrayList<Environment> obstacles = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
 float scale = 1;
+boolean inMenu = true;
+int menu = 0;  
+int level = -1;
 PImage marioSkin1;
+PImage marioMenuText;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -17,31 +21,30 @@ boolean[] keys = new boolean[]{false, false};
 void setup(){
   size(1920,1080);
   marioSkin1 = loadImage("marioskin1.png");
-  obstacles.add(new killerBird());
-  obstacles.add(new Invincibility(400));
-  Spike spike1 = new Spike(600);
-  obstacles.add(spike1);
-  spikedBall spikedBall1 = new spikedBall(1800);
-  obstacles.add(spikedBall1);
-  obstacles.add(new Pitfall(2500));
-  //obstacles.add(new poisonTrap(3200));
-  //obstacles.add(new Spike(3900));
-  //obstacles.add(new Spike(4600));
-  //obstacles.add(new spikedBall(6000));
-  obstacles.add(new doubleJump(3500));
-  obstacles.add(new poisonTrap(4000));
-  for (int i = 0; i < 100; i++){
-    int rng1 = (int)(Math.random() * 2);
-    int rng2 = 700 + (int)(Math.random() * 201);
-    backgroundObjects.add(new Cloud(backgroundObjectStartX+10));
-    if (rng1 == 0){
-      backgroundObjects.add(new Rock(backgroundObjectStartX));
-    }
-    else if (rng1 == 1){
-      backgroundObjects.add(new Tree(backgroundObjectStartX));
-    }
+  marioMenuText = loadImage("mariomenutext.png");
+  if (!(inMenu)){
+    for (int i = 0; i < 1000; i++){
+      int rng1 = (int)(Math.random() * 2);
+      int rng2 = 700 + (int)(Math.random() * 201);
+      backgroundObjects.add(new Cloud(backgroundObjectStartX+10));
+      if (rng1 == 0){
+        backgroundObjects.add(new Rock(backgroundObjectStartX));
+      }
+      else if (rng1 == 1){
+        backgroundObjects.add(new Tree(backgroundObjectStartX));
+      }
     backgroundObjectStartX+=rng2;
-  }
+    }
+    if (level == 0){
+      obstacles.add(new killerBird());
+      obstacles.add(new Invincibility(400));
+      obstacles.add(new Spike(600));
+      obstacles.add(new spikedBall(1800));
+      obstacles.add(new Pitfall(2500));
+      obstacles.add(new doubleJump(3500));
+      obstacles.add(new poisonTrap(4000));
+    }
+  }  
 }
 
 void keyPressed(){
@@ -67,7 +70,17 @@ void keyReleased(){
 }
 
 void draw(){
-  if (mario.paranoiaCountdown > 0){
+  if (inMenu){
+    fill(0);
+    if (menu == 0){
+      Platform menuPlatform = new Platform();
+      menuPlatform.display();
+      image(marioMenuText, 600, 200);
+    }
+  }
+    
+  else if (!(inMenu)){
+      if (mario.paranoiaCountdown > 0){
     speed = 8;
     scale(scale);
     if (scale < 1.5){
@@ -173,5 +186,6 @@ void draw(){
         text(doubleJumpCountdownText, 20, 440);
       }
     }
+  }
   }
 }
