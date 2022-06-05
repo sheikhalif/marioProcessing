@@ -126,13 +126,28 @@ void draw(){
 
   fill(0);
   textSize(50);
+  String paranoiaCountdownText = "Paranoia: " + ((mario.paranoiaCountdown/60)+1) + " seconds";
+  String doubleJumpCountdownText = "Double Jump: " + ((mario.doubleJumpCountdown/60) + 1) + " seconds";
+  String invincibilityCountdownText = "Invincibility: " + ((mario.invincibilityCountdown/60)+1) + " seconds";
   if (mario.paranoiaCountdown == 0){
     text (lives, 20, 50);
+    textSize(30);
     if (mario.doubleJumpCountdown > 0){
       fill(154, 70, 224);
-      String doubleJumpCountdownText = "Double Jump: " + ((mario.doubleJumpCountdown/60) + 1) + " seconds";
-      textSize(30);
       text(doubleJumpCountdownText, 20, 90);
+      if (mario.invincibilityCountdown > 0){
+        fill(85, 171, 234);
+        text(invincibilityCountdownText, 20, 130);
+      }
+    }
+    
+    else if (mario.invincibilityCountdown > 0){
+      fill(85, 171, 234);
+      text(invincibilityCountdownText, 20, 90);
+      if (mario.doubleJumpCountdown > 0){
+        fill(154, 70, 224);
+        text(doubleJumpCountdownText, 20, 130);
+      }
     }
   }
   else{
@@ -140,13 +155,23 @@ void draw(){
     fill(0);
     text(lives, 20, 350);
     fill(124, 118, 129);
-    String paranoiaCountdownText = "Paranoia: " + ((mario.paranoiaCountdown/60)+1) + " seconds";
     textSize(25);
     text(paranoiaCountdownText, 20, 380);
     if (mario.doubleJumpCountdown > 0){
       fill(154, 70, 224);
-      String doubleJumpCountdownText = "Double Jump: " + ((mario.doubleJumpCountdown/60) + 1) + " seconds";
       text(doubleJumpCountdownText, 20, 410);
+      if (mario.invincibilityCountdown > 0){
+        fill(85, 171, 234);
+        text(invincibilityCountdownText, 20, 440);
+      }
+    }
+    else if (mario.invincibilityCountdown > 0){
+      fill(85, 171, 234);
+      text(invincibilityCountdownText, 20, 410);
+      if (mario.doubleJumpCountdown > 0){
+        fill(154, 70, 224);
+        text(doubleJumpCountdownText, 20, 440);
+      }
     }
   }
 }
