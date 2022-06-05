@@ -12,8 +12,7 @@ public class Character{
   int doubleJumpCountdown = 0;
   int invincibilityCountdown = 0;
   boolean doubleJump = false;
-  int doubleJumpCounter = 0;
-  int secondJumpStart = 0;
+  int jumpStart = 0;
 
  
   public Character(){
@@ -22,24 +21,19 @@ public class Character{
   void move(){
     if (doubleJump){
       if (jump){
-        if (doubleJumpCounter == 1){
-          if (yval < 350)jump = false;
-          yval *= 0.93;
+        if (yval < 350){
+          jump = false;
         }
+        yval*=0.93;
       }
-      
-      
-      
-      
-      
-      if (doubleJumpCounter < 2){
-        yval *= 0.93;
-      }
-      if (doubleJumpCounter == 2){
-        doubleJump = false;
-        doubleJumpCounter = 0;
+      else if(jumpStart < 600){
+        if (yval < jumpStart-250){
+          doubleJump = false;
+        }
+        yval*=0.93;
       }
     }
+
     else if (jump){
       if (yval < 350){
         jump = false;
@@ -49,6 +43,9 @@ public class Character{
     if (!(trapped) && yval < 600){
       yval*=1.02;
       if (yval > 600)yval=600;
+      if (yval < 350){
+        yval*=1.02;
+      }
     }
   }
       
@@ -61,7 +58,7 @@ public class Character{
   }
  
   void jump(){
-    if (yval >= 300 && doubleJumpCountdown > 0){
+    if (yval >= 600 && doubleJumpCountdown > 0){
       jump = true;
       doubleJump = true;
     }

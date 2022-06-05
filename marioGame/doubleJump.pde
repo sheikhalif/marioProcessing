@@ -8,6 +8,7 @@ public class doubleJump extends Powerups{
   
   void display(){
     if (!(hit)){
+      fill(154, 70, 224);
       circle(x, 500, 100);
     }
   }

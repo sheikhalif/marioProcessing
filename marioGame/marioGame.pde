@@ -28,6 +28,7 @@ void setup(){
   //obstacles.add(new Spike(4600));
   //obstacles.add(new spikedBall(6000));
   obstacles.add(new doubleJump(3500));
+  obstacles.add(new poisonTrap(4000));
   for (int i = 0; i < 100; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -51,12 +52,7 @@ void keyPressed(){
   }
   if (keyCode == 32){
     mario.jump();
-    if (mario.doubleJumpCountdown > 0){
-      mario.doubleJumpCounter++;
-      if (mario.doubleJumpCounter == 2){
-        mario.secondJumpStart = mario.yval;
-      }
-    }
+    mario.jumpStart = mario.yval;
   }
 }
 
@@ -82,6 +78,9 @@ void draw(){
       scale = 1;
       speed = mario.speed;
     }
+  }
+  if (mario.doubleJumpCountdown > 0){
+    mario.doubleJumpCountdown--;
   }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
@@ -120,9 +119,25 @@ void draw(){
   textSize(50);
   if (mario.paranoiaCountdown == 0){
     text (lives, 20, 50);
+    if (mario.doubleJumpCountdown > 0){
+      fill(154, 70, 224);
+      String doubleJumpCountdownText = "Double Jump: " + ((mario.doubleJumpCountdown/60) + 1) + " seconds";
+      textSize(30);
+      text(doubleJumpCountdownText, 20, 90);
+    }
   }
   else{
     textSize(35);
+    fill(0);
     text(lives, 20, 350);
+    fill(124, 118, 129);
+    String paranoiaCountdownText = "Paranoia: " + ((mario.paranoiaCountdown/60)+1) + " seconds";
+    textSize(25);
+    text(paranoiaCountdownText, 20, 380);
+    if (mario.doubleJumpCountdown > 0){
+      fill(154, 70, 224);
+      String doubleJumpCountdownText = "Double Jump: " + ((mario.doubleJumpCountdown/60) + 1) + " seconds";
+      text(doubleJumpCountdownText, 20, 410);
+    }
   }
 }
