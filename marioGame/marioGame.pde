@@ -13,6 +13,10 @@ int menu = 0;
 int level = -1;
 PImage marioSkin1;
 PImage marioMenuText;
+PImage menuTutorialText;
+PImage menuLevel1Text;
+PImage menuLevel2Text;
+PImage menuLockerText;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -22,6 +26,10 @@ void setup(){
   size(1920,1080);
   marioSkin1 = loadImage("marioskin1.png");
   marioMenuText = loadImage("mariomenutext.png");
+  menuTutorialText = loadImage("menututorial.png");
+  menuLevel1Text = loadImage("menulevel1.png");
+  menuLevel2Text = loadImage("menulevel2.png");
+  menuLockerText = loadImage("menulocker.png");
   if (!(inMenu)){
     for (int i = 0; i < 1000; i++){
       int rng1 = (int)(Math.random() * 2);
@@ -75,7 +83,31 @@ void draw(){
     if (menu == 0){
       Platform menuPlatform = new Platform();
       menuPlatform.display();
+      theBackground.display();
       image(marioMenuText, 350, 0);
+      fill(0);
+      rect(470, 410, 420, 100);
+      fill (255);
+      rect(480, 420, 400, 80);
+      image(menuTutorialText, 490, 430);
+      
+      fill(0);
+      rect(470, 530, 420, 100);
+      fill (255);
+      rect(480, 540, 400, 80);
+      image(menuLevel1Text, 518, 550);
+      
+      fill(0);
+      rect(470, 650, 420, 100);
+      fill (255);
+      rect(480, 660, 400, 80);
+      image(menuLevel2Text, 518, 670);
+      
+      fill(0);
+      rect(470, 770, 420, 100);
+      fill (255);
+      rect(480, 780, 400, 80);
+      image(menuLockerText, 538, 790);
     }
   }
     
