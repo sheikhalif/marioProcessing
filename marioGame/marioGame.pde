@@ -17,6 +17,8 @@ PImage menuTutorialText;
 PImage menuLevel1Text;
 PImage menuLevel2Text;
 PImage menuLockerText;
+PImage platformSkin;
+PImage currentSkin;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -30,6 +32,8 @@ void setup(){
   menuLevel1Text = loadImage("menulevel1.png");
   menuLevel2Text = loadImage("menulevel2.png");
   menuLockerText = loadImage("menulocker.png");
+  platformSkin = loadImage("mariobrickplatform.png");
+  currentSkin = marioSkin1;
   if (!(inMenu)){
     for (int i = 0; i < 1000; i++){
       int rng1 = (int)(Math.random() * 2);
@@ -86,28 +90,31 @@ void draw(){
       theBackground.display();
       image(marioMenuText, 350, 0);
       fill(0);
-      rect(470, 410, 420, 100);
-      fill (255);
-      rect(480, 420, 400, 80);
-      image(menuTutorialText, 490, 430);
+      rect(500, 410, 420, 100);
+      fill (141, 79, 58);
+      rect(510, 420, 400, 80);
+      image(menuTutorialText, 520, 430);
       
       fill(0);
-      rect(470, 530, 420, 100);
-      fill (255);
-      rect(480, 540, 400, 80);
-      image(menuLevel1Text, 518, 550);
+      rect(500, 530, 420, 100);
+      fill (141, 79, 58);
+      rect(510, 540, 400, 80);
+      image(menuLevel1Text, 548, 550);
       
       fill(0);
-      rect(470, 650, 420, 100);
-      fill (255);
-      rect(480, 660, 400, 80);
-      image(menuLevel2Text, 518, 670);
+      rect(500, 650, 420, 100);
+      fill (141, 79, 58);
+      rect(510, 660, 400, 80);
+      image(menuLevel2Text, 548, 670);
       
       fill(0);
-      rect(470, 770, 420, 100);
-      fill (255);
-      rect(480, 780, 400, 80);
-      image(menuLockerText, 538, 790);
+      rect(500, 770, 420, 100);
+      fill (141, 79, 58);
+      rect(510, 780, 400, 80);
+      image(menuLockerText, 568, 790);
+      
+      scale(1.7);
+      image(currentSkin, 650, 230);
     }
   }
     
