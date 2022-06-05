@@ -21,7 +21,7 @@ public class Invincibility extends Powerups{
     if (!(hit) && x < 250 && x > 150 && mario.yval > 150 && mario.yval < 550){
       mario.invincibilityCountdown = 600;
       hit = true;
-      speed = 50;
+      speed = 30;
     }
   }
 }

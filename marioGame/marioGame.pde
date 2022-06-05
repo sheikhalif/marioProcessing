@@ -86,7 +86,7 @@ void draw(){
   if (mario.invincibilityCountdown > 0){
     mario.invincibilityCountdown--;
     if (mario.invincibilityCountdown <= 10){
-      mario.speed = 15;
+      speed = 15;
     }
   }
   theBackground.display();
