@@ -18,6 +18,7 @@ void setup(){
   size(1920,1080);
   marioSkin1 = loadImage("marioskin1.png");
   obstacles.add(new killerBird());
+  obstacles.add(new Invincibility(400));
   Spike spike1 = new Spike(600);
   obstacles.add(spike1);
   spikedBall spikedBall1 = new spikedBall(1800);
@@ -82,6 +83,12 @@ void draw(){
   if (mario.doubleJumpCountdown > 0){
     mario.doubleJumpCountdown--;
   }
+  if (mario.invincibilityCountdown > 0){
+    mario.invincibilityCountdown--;
+    if (mario.invincibilityCountdown <= 10){
+      mario.speed = 15;
+    }
+  }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
     backgroundObjects.get(i).display();
@@ -93,7 +100,9 @@ void draw(){
   for(int i = 0; i < obstacles.size(); i++){
     if (obstacles.get(i).x < 2500){
       obstacles.get(i).display();
-      obstacles.get(i).check();
+      if (mario.invincibilityCountdown == 0){
+        obstacles.get(i).check();
+      }
     }
     
   }

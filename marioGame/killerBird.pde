@@ -39,7 +39,9 @@ public class killerBird extends Environment{
           attackY = y;
         }
         attack();
-        check();
+        if (mario.invincibilityCountdown == 0){
+          check();
+        }
       }
     }
       
