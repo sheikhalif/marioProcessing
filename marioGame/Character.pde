@@ -9,13 +9,32 @@ public class Character{
   color c;
   boolean trapped = false;
   int paranoiaCountdown = 0;
-  
+  int doubleJumpCountdown = 0;
+  int invincibilityCountdown = 0;
+  boolean doubleJump = false;
+  int jumpStart = 0;
+
  
   public Character(){
   }
  
   void move(){
-    if (jump){
+    if (doubleJump){
+      if (jump){
+        if (yval < 350){
+          jump = false;
+        }
+        yval*=0.93;
+      }
+      else if(jumpStart < 600){
+        if (yval < jumpStart-250){
+          doubleJump = false;
+        }
+        yval*=0.93;
+      }
+    }
+
+    else if (jump){
       if (yval < 350){
         jump = false;
       }
@@ -24,6 +43,9 @@ public class Character{
     if (!(trapped) && yval < 600){
       yval*=1.02;
       if (yval > 600)yval=600;
+      if (yval < 350){
+        yval*=1.02;
+      }
     }
   }
       
@@ -36,8 +58,13 @@ public class Character{
   }
  
   void jump(){
-    if (yval >= 600)jump = true;
+    if (yval >= 600 && doubleJumpCountdown > 0){
+      jump = true;
+      doubleJump = true;
+    }
+    else if (yval >= 600)jump = true;
   }
+    
   
   void damage(){
     lives--;
