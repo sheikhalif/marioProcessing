@@ -70,12 +70,12 @@ void keyReleased(){
 }
 
 void draw(){
+  background(255);
   if (inMenu){
-    fill(0);
     if (menu == 0){
       Platform menuPlatform = new Platform();
       menuPlatform.display();
-      image(marioMenuText, 600, 200);
+      image(marioMenuText, 350, 0);
     }
   }
     
