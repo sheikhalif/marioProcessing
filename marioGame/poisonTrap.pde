@@ -41,7 +41,10 @@ public class poisonTrap extends Traps{
     rect(x+240, 1000, 10, 10);
     rect(x+270, 1060, 10, 10);
     rect(x+290, 1040, 10, 10);
-    check();
+    if (mario.invincibilityCountdown == 0){
+      check();
+    }
+    
     
   }
   

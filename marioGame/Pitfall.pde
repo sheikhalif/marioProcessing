@@ -12,7 +12,9 @@ public class Pitfall extends Traps{
     strokeWeight(8);
     line(x, 900, x, 1080);
     line(x+400, 900, x+400, 1080);
-    check();
+    if (mario.invincibilityCountdown == 0){
+      check();
+    }
   }
   
   void move(){
