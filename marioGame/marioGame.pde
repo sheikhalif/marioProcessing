@@ -89,11 +89,27 @@ void draw(){
       menuPlatform.display();
       theBackground.display();
       image(marioMenuText, 350, 0);
+      if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(490, 400, 440, 120);
+        noStroke();
+      }
+
       fill(0);
       rect(500, 410, 420, 100);
       fill (141, 79, 58);
       rect(510, 420, 400, 80);
       image(menuTutorialText, 520, 430);
+      
+      if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(490, 520, 440, 120);
+        noStroke();
+      }
       
       fill(0);
       rect(500, 530, 420, 100);
@@ -101,11 +117,27 @@ void draw(){
       rect(510, 540, 400, 80);
       image(menuLevel1Text, 548, 550);
       
+      if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(490, 640, 440, 120);
+        noStroke();
+      }
+      
       fill(0);
       rect(500, 650, 420, 100);
       fill (141, 79, 58);
       rect(510, 660, 400, 80);
       image(menuLevel2Text, 548, 670);
+      
+      if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(490, 760, 440, 120);
+        noStroke();
+      }
       
       fill(0);
       rect(500, 770, 420, 100);
