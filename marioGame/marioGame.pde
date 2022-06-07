@@ -44,6 +44,9 @@ void setup(){
     else if (rng1 == 1){
       backgroundObjects.add(new Tree(backgroundObjectStartX));
     }
+    if (i % 30 == 0){
+      backgroundObjects.add(new Platform(1920*i));
+    }
     backgroundObjectStartX+=rng2;
   }
   tutorial.add(new killerBird());
@@ -197,12 +200,17 @@ void draw(){
   }
   theBackground.display();
   for(int i = 0; i < backgroundObjects.size(); i++){
-    backgroundObjects.get(i).display();
+    if (backgroundObjects.get(i).x < 2000){
+      backgroundObjects.get(i).display();
+    }
+    if (backgroundObjects.get(i).x < -400){
+      backgroundObjects.remove(backgroundObjects.get(i));
+    }
+    
   }
   String lives = "Lives: " + mario.lives;
   mario.display();
   mario.move();
-  grassPlatform.display();
   if (level == 0){
     for(int i = 0; i < tutorial.size(); i++){
       if (tutorial.get(i).x < 2500){
@@ -214,12 +222,11 @@ void draw(){
     }
     if (keys[0]){
       for (int i = 0; i < tutorial.size(); i++){
-        Environment currentObstacle = tutorial.get(i);
-        if (currentObstacle.x < -150){
-          tutorial.remove(currentObstacle);
+        if (tutorial.get(i).x < -150){
+          tutorial.remove(tutorial.get(i));
         }
         else{
-          currentObstacle.move();
+          tutorial.get(i).move();
         }
       }
     }
