@@ -51,6 +51,7 @@ void setup(){
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
+  tutorial.add(new tutorialText(400, "Welcome to Mario! Move using 'd' and jump using 'space'."));
   tutorial.add(new killerBird());
   tutorial.add(new Invincibility(400));
   tutorial.add(new Spike(600));
