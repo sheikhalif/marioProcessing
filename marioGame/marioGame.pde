@@ -4,7 +4,7 @@ import java.lang.*;
 Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
-ArrayList<Environment> obstacles = new ArrayList<Environment>();
+ArrayList<Environment> tutorial = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
 float scale = 1;
@@ -34,30 +34,27 @@ void setup(){
   menuLockerText = loadImage("menulocker.png");
   platformSkin = loadImage("mariobrickplatform.png");
   currentSkin = marioSkin1;
-  if (!(inMenu)){
-    for (int i = 0; i < 1000; i++){
-      int rng1 = (int)(Math.random() * 2);
-      int rng2 = 700 + (int)(Math.random() * 201);
-      backgroundObjects.add(new Cloud(backgroundObjectStartX+10));
-      if (rng1 == 0){
-        backgroundObjects.add(new Rock(backgroundObjectStartX));
-      }
-      else if (rng1 == 1){
-        backgroundObjects.add(new Tree(backgroundObjectStartX));
-      }
+  for (int i = 0; i < 1000; i++){
+    int rng1 = (int)(Math.random() * 2);
+    int rng2 = 700 + (int)(Math.random() * 201);
+    backgroundObjects.add(new Cloud(backgroundObjectStartX+10));
+    if (rng1 == 0){
+      backgroundObjects.add(new Rock(backgroundObjectStartX));
+    }
+    else if (rng1 == 1){
+      backgroundObjects.add(new Tree(backgroundObjectStartX));
+    }
     backgroundObjectStartX+=rng2;
-    }
-    if (level == 0){
-      obstacles.add(new killerBird());
-      obstacles.add(new Invincibility(400));
-      obstacles.add(new Spike(600));
-      obstacles.add(new spikedBall(1800));
-      obstacles.add(new Pitfall(2500));
-      obstacles.add(new doubleJump(3500));
-      obstacles.add(new poisonTrap(4000));
-    }
-  }  
-}
+  }
+  tutorial.add(new killerBird());
+  tutorial.add(new Invincibility(400));
+  tutorial.add(new Spike(600));
+  tutorial.add(new spikedBall(1800));
+  tutorial.add(new Pitfall(2500));
+  tutorial.add(new doubleJump(3500));
+  tutorial.add(new poisonTrap(4000));
+}  
+
 
 void keyPressed(){
   if (keyCode == 68){
@@ -78,6 +75,13 @@ void keyReleased(){
   }
   if (keyCode == 65){
     keys[1] = false;
+  }
+}
+
+void mouseClicked(){
+  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
+    inMenu = false;
+    level = 0;
   }
 }
 
@@ -181,25 +185,30 @@ void draw(){
   mario.display();
   mario.move();
   grassPlatform.display();
-  for(int i = 0; i < obstacles.size(); i++){
-    if (obstacles.get(i).x < 2500){
-      obstacles.get(i).display();
-      if (mario.invincibilityCountdown == 0){
-        obstacles.get(i).check();
+  if (level == 0){
+    for(int i = 0; i < tutorial.size(); i++){
+      if (tutorial.get(i).x < 2500){
+        tutorial.get(i).display();
+        if (mario.invincibilityCountdown == 0){
+          tutorial.get(i).check();
+        }
       }
     }
+    if (keys[0]){
+      for (int i = 0; i < tutorial.size(); i++){
+        Environment currentObstacle = tutorial.get(i);
+        if (currentObstacle.x < -150){
+          tutorial.remove(currentObstacle);
+        }
+        else{
+          currentObstacle.move();
+        }
+      }
+    }
+  
     
   }
   if (keys[0]){
-    for (int i = 0; i < obstacles.size(); i++){
-      Environment currentObstacle = obstacles.get(i);
-      if (currentObstacle.x < -150){
-        obstacles.remove(currentObstacle);
-      }
-      else{
-        currentObstacle.move();
-      }
-    }
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
       if (backgroundObjects.get(i).x < -300){

@@ -51,13 +51,14 @@ public class spikedBall extends Environment{
   
  
   boolean checkInFront(){
-  for (int i = 0; i < obstacles.size(); i++){
-    //println("Obstacle x: " + obstacles.get(i).getX());
-    //println("My x: " + x);
-    if (obstacles.get(i).getX() > 0 && obstacles.get(i).getX() < x){
-      return false;
+    if (level == 0){
+      for (int i = 0; i < tutorial.size(); i++){
+        if (tutorial.get(i).getX() > 0 && tutorial.get(i).getX() < x){
+          return false;
+        }
+      }
+      return true;
     }
-  }
-  return true;
+    return true;
   }
 }
