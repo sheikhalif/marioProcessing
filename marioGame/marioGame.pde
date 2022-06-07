@@ -83,6 +83,17 @@ void mouseClicked(){
     inMenu = false;
     level = 0;
   }
+  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
+    inMenu = false;
+    level = 1;
+  }
+  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
+    inMenu = false;
+    level = 2;
+  }
+  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
+    menu = 1;
+  }
 }
 
 void draw(){
@@ -152,6 +163,13 @@ void draw(){
       scale(1.7);
       image(currentSkin, 650, 230);
     }
+    if (menu == 1){
+      Platform menuPlatform = new Platform();
+      menuPlatform.display();
+      theBackground.display();
+      image(currentSkin, 300, 300);
+    }
+      
   }
     
   else if (!(inMenu)){
