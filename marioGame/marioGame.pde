@@ -44,10 +44,12 @@ void setup(){
     else if (rng1 == 1){
       backgroundObjects.add(new Tree(backgroundObjectStartX));
     }
-    if (i % 30 == 0){
-      backgroundObjects.add(new Platform(1920*i));
-    }
+    
     backgroundObjectStartX+=rng2;
+  }
+  
+  for (int i = 0; i < 40; i++){
+    backgroundObjects.add(new Platform(1920*i));
   }
   tutorial.add(new killerBird());
   tutorial.add(new Invincibility(400));
