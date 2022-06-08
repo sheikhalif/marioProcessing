@@ -110,7 +110,9 @@ void setup(){
     tutorial.add(new Spike(39400+(100*i)));
   }
   tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
-  tutorialCopy = tutorial;
+  for (Environment element : tutorial){
+    tutorialCopy.add(element);
+  }
   
   
 }  
@@ -156,7 +158,21 @@ void mouseClicked(){
       menu = 1;
     }
   }
-  if (mario.dead){
+  if (mario.dead && level == 0){
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+      tutorial.clear();
+      for (Environment element : tutorialCopy){
+        tutorial.add(element);
+      }
+      mario.lives = 3;
+      mario.dead = false;
+    }
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+      tutorial = tutorialCopy;
+      mario.dead = false;
+      inMenu = true;
+      menu = 0;
+    }
   }
   
 }
