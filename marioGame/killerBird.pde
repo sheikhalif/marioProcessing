@@ -11,13 +11,14 @@ public class killerBird extends Environment{
   int countdown = 760;
   boolean hit = false;
   color c = color(0, 0, 0);
-  public killerBird(){
-    x = 2000;
+  public killerBird(int x__){
+    x = x__;
     y = 170;
   }
   
   void display(){
-    if (countdown > 0)countdown--;
+    if (x < 1920){
+      if (countdown > 0)countdown--;
     if (countdown == 0)attackMode = true;
     strokeWeight(20);
     stroke(c);
@@ -43,6 +44,8 @@ public class killerBird extends Environment{
           check();
         }
       }
+    }
+    
     }
       
     noStroke();
@@ -83,14 +86,20 @@ public class killerBird extends Environment{
   }
   
   void move(){
-    if (movementMode){
-      x-=4;
-      if (x <= 20)movementMode=false;
+    if (x > 1980){
+      x-=speed;
     }
-    else if (!(movementMode)){
-      x+=2;
-      if (x>=1900)movementMode=true;
+    else{
+      if (movementMode){
+        x-=4;
+        if (x <= 20)movementMode=false;
+      }
+      else if (!(movementMode)){
+        x+=2;
+        if (x>=1900)movementMode=true;
     }
+    
   }
+}
 }
     

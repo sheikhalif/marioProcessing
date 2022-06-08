@@ -7,6 +7,7 @@ public class Spike extends Environment{
   }
  
   void display(){
+    noStroke();
     fill(150);
     triangle(x, 900, x+45, 800, x+90, 900);
   }

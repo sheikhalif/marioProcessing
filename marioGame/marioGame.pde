@@ -63,10 +63,48 @@ void setup(){
   tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
   tutorial.add(new Spike(1200));
   tutorial.add(new Spike(1800));
-  tutorial.add(new tutorialText(2200, "There are three types of obstacles in this game: "));
-  tutorial.add(new tutorialText(2600, "Spike"));
-  tutorial.add(new Spike(2700));
-  tutorial.add(new 
+  tutorial.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
+  tutorial.add(new tutorialText(5090, "Spikes"));
+  tutorial.add(new Spike(5120));
+  tutorial.add(new tutorialText(6000, "Spiked Balls"));
+  tutorial.add(new spikedBall(7000));
+  tutorial.add(new tutorialText(7500, "and Killer Birds. Watch out!"));
+  tutorial.add(new killerBird(2000));
+  tutorial.add(new tutorialText(14000, "There are two types of traps:"));
+  tutorial.add(new tutorialText(15500, "Poison Traps. Jump on it to see what happens!"));
+  tutorial.add(new poisonTrap(16800));
+  tutorial.add(new Spike(17700));
+  tutorial.add(new Spike(18200));
+  tutorial.add(new spikedBall(19400));
+  tutorial.add(new Spike(19900));
+  tutorial.add(new Spike(20500));
+  tutorial.add(new Spike(21000));
+  tutorial.add(new tutorialText(22800, "and Pitfalls. Don't jump!"));
+  tutorial.add(new Pitfall(23800));
+  tutorial.add(new tutorialText(24800, "Lastly, there are two power-ups:"));
+  tutorial.add(new tutorialText(26000, "Double Jump"));
+  tutorial.add(new doubleJump(27000));
+  tutorial.add(new Spike(27700));
+  tutorial.add(new Spike(27800));
+  tutorial.add(new Spike(27900));
+  tutorial.add(new Spike(28000));
+  tutorial.add(new Spike(28100));
+  tutorial.add(new Spike(28200));
+  tutorial.add(new Spike(28300));
+  tutorial.add(new spikedBall(28900));
+  tutorial.add(new spikedBall(29100));
+  tutorial.add(new spikedBall(29300));
+  tutorial.add(new killerBird(24000));
+  tutorial.add(new killerBird (24100));
+  tutorial.add(new killerBird(24200));
+  tutorial.add(new killerBird(24300));
+  tutorial.add(new killerBird(24400));
+  tutorial.add(new tutorialText(37500, "and invincibility mode. Run!!"));
+  tutorial.add(new Invincibility(38900));
+  for (int i = 0; i < 170; i++){
+    tutorial.add(new Spike(39400+(100*i)));
+  }
+  tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
 }  
 
 
@@ -224,7 +262,7 @@ void draw(){
   mario.move();
   if (level == 0){
     for(int i = 0; i < tutorial.size(); i++){
-      if (tutorial.get(i).x < 2500){
+      if (tutorial.get(i).x < 1920){
         tutorial.get(i).display();
         if (mario.invincibilityCountdown == 0){
           tutorial.get(i).check();
