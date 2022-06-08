@@ -41,7 +41,10 @@ public class poisonTrap extends Traps{
     rect(x+240, 1000, 10, 10);
     rect(x+270, 1060, 10, 10);
     rect(x+290, 1040, 10, 10);
-    check();
+    if (mario.invincibilityCountdown == 0){
+      check();
+    }
+    
     
   }
   
@@ -51,7 +54,6 @@ public class poisonTrap extends Traps{
   
   void check(){
     if (!(hit) && mario.yval+300 >= 900 && x < 200 && x > -100){
-      mario.damage();
       mario.paranoiaCountdown = 600;
       hit = true;
     }
