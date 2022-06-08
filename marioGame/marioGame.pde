@@ -12,6 +12,7 @@ float scale = 1;
 boolean inMenu = true;
 int menu = 0;  
 int level = -1;
+color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
 PImage marioMenuText;
 PImage menuTutorialText;
@@ -138,21 +139,26 @@ void keyReleased(){
 }
 
 void mouseClicked(){
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
+  if (inMenu && menu == 0){
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
     inMenu = false;
     level = 0;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
+      inMenu = false;
+      level = 1;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
+      inMenu = false;
+      level = 2;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
+      menu = 1;
+    }
   }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
-    inMenu = false;
-    level = 1;
+  if (mario.dead){
   }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
-    inMenu = false;
-    level = 2;
-  }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
-    menu = 1;
-  }
+  
 }
 
 void draw(){
@@ -287,6 +293,9 @@ void draw(){
       fill(255);
       rect(748, 450, 420, 100);
       fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+        fill(255);
+      }
       rect(758, 460, 400, 80);
       fill(255, 0, 0);
       textSize(50);
@@ -295,7 +304,11 @@ void draw(){
       fill(255);
       rect(748, 570, 420, 100);
       fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+        fill(255);
+      }
       rect(758, 580, 400, 80);
+      fill(255, 0, 0);
       fill(255, 0, 0);
       text("Main Menu", 840, 635);
     }
