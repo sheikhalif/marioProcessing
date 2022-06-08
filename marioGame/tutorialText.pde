@@ -1,15 +1,17 @@
 public class tutorialText extends Environment{
-  int x;
-  String message;
+  int x = 0;
+  String message = "";
   PFont marioFont = createFont("super_mario_rpg_font.ttf", 150);
   
   public tutorialText (int x__, String s){
     x = x__;
-    s = message;
+    message = s;
   }
   
   void display(){
+    fill(0);
     textFont(marioFont);
+    textSize(70);
     text(message, x, 200);
   }
   

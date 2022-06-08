@@ -51,7 +51,7 @@ void setup(){
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
-  tutorial.add(new tutorialText(400, "Welcome to Mario! Move using 'd' and jump using 'space'."));
+  /**
   tutorial.add(new killerBird());
   tutorial.add(new Invincibility(400));
   tutorial.add(new Spike(600));
@@ -59,6 +59,14 @@ void setup(){
   tutorial.add(new Pitfall(2500));
   tutorial.add(new doubleJump(3500));
   tutorial.add(new poisonTrap(4000));
+  **/
+  tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
+  tutorial.add(new Spike(1200));
+  tutorial.add(new Spike(1800));
+  tutorial.add(new tutorialText(2200, "There are three types of obstacles in this game: "));
+  tutorial.add(new tutorialText(2600, "Spike"));
+  tutorial.add(new Spike(2700));
+  tutorial.add(new 
 }  
 
 
