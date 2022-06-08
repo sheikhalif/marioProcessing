@@ -5,12 +5,14 @@ Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
 ArrayList<Environment> tutorial = new ArrayList<Environment>();
+ArrayList<Environment> tutorialCopy = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
 float scale = 1;
 boolean inMenu = true;
 int menu = 0;  
 int level = -1;
+color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
 PImage marioMenuText;
 PImage menuTutorialText;
@@ -51,7 +53,7 @@ void setup(){
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
-  tutorial.add(new tutorialText(400, "Welcome to Mario! Move using 'd' and jump using 'space'."));
+  /**
   tutorial.add(new killerBird());
   tutorial.add(new Invincibility(400));
   tutorial.add(new Spike(600));
@@ -59,6 +61,60 @@ void setup(){
   tutorial.add(new Pitfall(2500));
   tutorial.add(new doubleJump(3500));
   tutorial.add(new poisonTrap(4000));
+  **/
+  tutorial.add(new Spike(300));
+  tutorial.add(new Spike(300));
+  tutorial.add(new Spike(300));
+  tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
+  tutorial.add(new Spike(1200));
+  tutorial.add(new Spike(1800));
+  tutorial.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
+  tutorial.add(new tutorialText(5090, "Spikes"));
+  tutorial.add(new Spike(5120));
+  tutorial.add(new tutorialText(6000, "Spiked Balls"));
+  tutorial.add(new spikedBall(7000));
+  tutorial.add(new tutorialText(7500, "and Killer Birds. Watch out!"));
+  tutorial.add(new killerBird(2000));
+  tutorial.add(new tutorialText(14000, "There are two types of traps:"));
+  tutorial.add(new tutorialText(15500, "Poison Traps. Jump on it to see what happens!"));
+  tutorial.add(new poisonTrap(16800));
+  tutorial.add(new Spike(17700));
+  tutorial.add(new Spike(18200));
+  tutorial.add(new spikedBall(19400));
+  tutorial.add(new Spike(19900));
+  tutorial.add(new Spike(20500));
+  tutorial.add(new Spike(21000));
+  tutorial.add(new tutorialText(22800, "and Pitfalls. Don't jump!"));
+  tutorial.add(new Pitfall(23800));
+  tutorial.add(new tutorialText(24800, "Lastly, there are two power-ups:"));
+  tutorial.add(new tutorialText(26000, "Double Jump"));
+  tutorial.add(new doubleJump(27000));
+  tutorial.add(new Spike(27700));
+  tutorial.add(new Spike(27800));
+  tutorial.add(new Spike(27900));
+  tutorial.add(new Spike(28000));
+  tutorial.add(new Spike(28100));
+  tutorial.add(new Spike(28200));
+  tutorial.add(new Spike(28300));
+  tutorial.add(new spikedBall(28900));
+  tutorial.add(new spikedBall(29100));
+  tutorial.add(new spikedBall(29300));
+  tutorial.add(new killerBird(24000));
+  tutorial.add(new killerBird (24100));
+  tutorial.add(new killerBird(24200));
+  tutorial.add(new killerBird(24300));
+  tutorial.add(new killerBird(24400));
+  tutorial.add(new tutorialText(37500, "and invincibility mode. Run!!"));
+  tutorial.add(new Invincibility(38900));
+  for (int i = 0; i < 170; i++){
+    tutorial.add(new Spike(39400+(100*i)));
+  }
+  tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
+  for (Environment element : tutorial){
+    tutorialCopy.add(element);
+  }
+  
+  
 }  
 
 
@@ -85,25 +141,45 @@ void keyReleased(){
 }
 
 void mouseClicked(){
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
+  if (inMenu && menu == 0){
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
     inMenu = false;
     level = 0;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
+      inMenu = false;
+      level = 1;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
+      inMenu = false;
+      level = 2;
+    }
+    if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
+      menu = 1;
+    }
   }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
-    inMenu = false;
-    level = 1;
+  if (mario.dead && level == 0){
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+      tutorial.clear();
+      for (Environment element : tutorialCopy){
+        tutorial.add(element);
+      }
+      mario.lives = 3;
+      mario.dead = false;
+    }
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+      tutorial = tutorialCopy;
+      mario.dead = false;
+      inMenu = true;
+      menu = 0;
+    }
   }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
-    inMenu = false;
-    level = 2;
-  }
-  if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
-    menu = 1;
-  }
+  
 }
 
 void draw(){
   background(255);
+    
   if (inMenu){
     if (menu == 0){
       Platform menuPlatform = new Platform();
@@ -178,7 +254,7 @@ void draw(){
       
   }
     
-  else if (!(inMenu)){
+  if (!(inMenu)){
       if (mario.paranoiaCountdown > 0){
     speed = 8;
     scale(scale);
@@ -216,14 +292,44 @@ void draw(){
   mario.move();
   if (level == 0){
     for(int i = 0; i < tutorial.size(); i++){
-      if (tutorial.get(i).x < 2500){
+      if (tutorial.get(i).x < 1920){
         tutorial.get(i).display();
         if (mario.invincibilityCountdown == 0){
           tutorial.get(i).check();
         }
       }
     }
-    if (keys[0]){
+    if (mario.dead){
+      fill(0);
+      stroke(255, 0, 0);
+      strokeWeight(3);
+      rect(600, 300, 720, 480);
+      fill(255, 0, 0);
+      text("You died!", 815, 400);
+      fill(255);
+      rect(748, 450, 420, 100);
+      fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+        fill(255);
+      }
+      rect(758, 460, 400, 80);
+      fill(255, 0, 0);
+      textSize(50);
+      text("Retry", 885, 515);
+      
+      fill(255);
+      rect(748, 570, 420, 100);
+      fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+        fill(255);
+      }
+      rect(758, 580, 400, 80);
+      fill(255, 0, 0);
+      fill(255, 0, 0);
+      text("Main Menu", 840, 635);
+    }
+    else{
+      if (keys[0]){
       for (int i = 0; i < tutorial.size(); i++){
         if (tutorial.get(i).x < -150){
           tutorial.remove(tutorial.get(i));
@@ -233,10 +339,10 @@ void draw(){
         }
       }
     }
-  
-    
+    }
+      
   }
-  if (keys[0]){
+  if (keys[0] && !(mario.dead)){
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
       if (backgroundObjects.get(i).x < -300){

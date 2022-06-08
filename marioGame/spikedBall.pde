@@ -7,6 +7,7 @@ public class spikedBall extends Environment{
   }
  
   void display(){
+    noStroke();
     fill(0);
     square(x+50, 800, 100);
     fill(100);
@@ -23,7 +24,7 @@ public class spikedBall extends Environment{
     triangle(x+150, 850, x+200, 837, x+150, 824);
     triangle(x+150, 824, x+200, 812, x+150, 800);
     if (checkInFront()){
-      x-=speed*0.4;
+      x-=5;
     }
   }
  

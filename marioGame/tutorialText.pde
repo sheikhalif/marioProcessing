@@ -5,11 +5,13 @@ public class tutorialText extends Environment{
   
   public tutorialText (int x__, String s){
     x = x__;
-    s = message;
+    message = s;
   }
   
   void display(){
+    fill(0);
     textFont(marioFont);
+    textSize(70);
     text(message, x, 200);
   }
   

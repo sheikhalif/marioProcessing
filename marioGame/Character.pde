@@ -13,6 +13,7 @@ public class Character{
   int invincibilityCountdown = 0;
   boolean doubleJump = false;
   int jumpStart = 0;
+  boolean dead = false;
 
  
   public Character(){
@@ -55,6 +56,9 @@ public class Character{
     rect(100, yval, 100, 300);
     image(marioSkin1, 100, yval);
     c = color(0, 0, 0);
+    if (lives <= 0){
+      dead =  true;
+    }
   }
  
   void jump(){
@@ -67,7 +71,7 @@ public class Character{
     
   
   void damage(){
-    lives--;
+    if (lives > 0)lives--;
     c = color(255, 0, 0);
   }
 }
