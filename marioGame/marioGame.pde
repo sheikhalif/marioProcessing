@@ -53,18 +53,11 @@ void setup(){
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
-  /**
-  tutorial.add(new killerBird());
-  tutorial.add(new Invincibility(400));
-  tutorial.add(new Spike(600));
-  tutorial.add(new spikedBall(1800));
-  tutorial.add(new Pitfall(2500));
-  tutorial.add(new doubleJump(3500));
-  tutorial.add(new poisonTrap(4000));
-  **/
-  tutorial.add(new Spike(300));
-  tutorial.add(new Spike(300));
-  tutorial.add(new Spike(300));
+  }
+  
+
+void setTutorial(){
+  tutorial.clear();
   tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
   tutorial.add(new Spike(1200));
   tutorial.add(new Spike(1800));
@@ -110,12 +103,9 @@ void setup(){
     tutorial.add(new Spike(39400+(100*i)));
   }
   tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
-  for (Environment element : tutorial){
-    tutorialCopy.add(element);
-  }
+}
   
   
-}  
 
 
 void keyPressed(){
@@ -145,6 +135,7 @@ void mouseClicked(){
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 410 && mouseY <= 510){
     inMenu = false;
     level = 0;
+    setTutorial();
     }
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
       inMenu = false;
@@ -160,18 +151,15 @@ void mouseClicked(){
   }
   if (mario.dead && level == 0){
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
-      tutorial.clear();
-      for (Environment element : tutorialCopy){
-        tutorial.add(element);
-      }
+      setTutorial();
       mario.lives = 3;
       mario.dead = false;
     }
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
-      tutorial = tutorialCopy;
       mario.dead = false;
       inMenu = true;
       menu = 0;
+      mario.lives = 3;
     }
   }
   
