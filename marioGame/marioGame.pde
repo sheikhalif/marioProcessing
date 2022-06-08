@@ -5,6 +5,7 @@ Character mario = new Character();
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
 ArrayList<Environment> tutorial = new ArrayList<Environment>();
+ArrayList<Environment> tutorialCopy = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
 float scale = 1;
@@ -60,6 +61,9 @@ void setup(){
   tutorial.add(new doubleJump(3500));
   tutorial.add(new poisonTrap(4000));
   **/
+  tutorial.add(new Spike(300));
+  tutorial.add(new Spike(300));
+  tutorial.add(new Spike(300));
   tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
   tutorial.add(new Spike(1200));
   tutorial.add(new Spike(1800));
@@ -105,6 +109,9 @@ void setup(){
     tutorial.add(new Spike(39400+(100*i)));
   }
   tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
+  tutorialCopy = tutorial;
+  
+  
 }  
 
 
@@ -150,6 +157,7 @@ void mouseClicked(){
 
 void draw(){
   background(255);
+    
   if (inMenu){
     if (menu == 0){
       Platform menuPlatform = new Platform();
@@ -224,7 +232,7 @@ void draw(){
       
   }
     
-  else if (!(inMenu)){
+  if (!(inMenu)){
       if (mario.paranoiaCountdown > 0){
     speed = 8;
     scale(scale);
@@ -269,7 +277,30 @@ void draw(){
         }
       }
     }
-    if (keys[0]){
+    if (mario.dead){
+      fill(0);
+      stroke(255, 0, 0);
+      strokeWeight(3);
+      rect(600, 300, 720, 480);
+      fill(255, 0, 0);
+      text("You died!", 815, 400);
+      fill(255);
+      rect(748, 450, 420, 100);
+      fill (0);
+      rect(758, 460, 400, 80);
+      fill(255, 0, 0);
+      textSize(50);
+      text("Retry", 885, 515);
+      
+      fill(255);
+      rect(748, 570, 420, 100);
+      fill (0);
+      rect(758, 580, 400, 80);
+      fill(255, 0, 0);
+      text("Main Menu", 840, 635);
+    }
+    else{
+      if (keys[0]){
       for (int i = 0; i < tutorial.size(); i++){
         if (tutorial.get(i).x < -150){
           tutorial.remove(tutorial.get(i));
@@ -279,10 +310,10 @@ void draw(){
         }
       }
     }
-  
-    
+    }
+      
   }
-  if (keys[0]){
+  if (keys[0] && !(mario.dead)){
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
       if (backgroundObjects.get(i).x < -300){
