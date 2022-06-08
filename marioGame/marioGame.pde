@@ -12,6 +12,7 @@ float scale = 1;
 boolean inMenu = true;
 int menu = 0;  
 int level = -1;
+boolean levelCompleted = false;
 color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
 PImage marioMenuText;
@@ -59,6 +60,7 @@ void setup(){
 void setTutorial(){
   tutorial.clear();
   tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
+  tutorial.add(new Flag(300));
   tutorial.add(new Spike(1200));
   tutorial.add(new Spike(1800));
   tutorial.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
@@ -338,6 +340,7 @@ void draw(){
       }
     }
   }
+  if (
 
   fill(0);
   textSize(50);
