@@ -22,4 +22,5 @@ DEVELOPMENT LOG
 6/4 : wrote invincibility mode, all game features are done, time for menu, level design, and aesthetic changes  
 6/5 : designed main menu  
 6/6 : main menu buttons have hover animations and they lead to levels  
+6/7 : designed and implemented tutorial level and worked on death screen  
 
