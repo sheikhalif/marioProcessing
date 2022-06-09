@@ -24,4 +24,5 @@ DEVELOPMENT LOG
 6/6 : main menu buttons have hover animations and they lead to levels  
 6/7 : designed and implemented tutorial level and worked on death screen  
 6/8 : added functionality to death screen and did end of level screen  
+6/9 : designed new mario skins and put it in locker menu  
 
