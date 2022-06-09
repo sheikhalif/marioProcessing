@@ -16,6 +16,9 @@ int level = -1;
 boolean levelCompleted = false;
 color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
+PImage marioSkin2;
+PImage marioSkin3;
+PImage marioSkin4;
 PImage marioMenuText;
 PImage menuTutorialText;
 PImage menuLevel1Text;
@@ -32,6 +35,9 @@ void setup(){
   size(1920,1080);
   marioFont = createFont("super_mario_rpg_font.ttf", 150);
   marioSkin1 = loadImage("marioskin1.png");
+  marioSkin2 = loadImage("marioskin3.png");
+  marioSkin3 = loadImage("marioskin2.png");
+  marioSkin4 = loadImage("marioskin4.png");
   marioMenuText = loadImage("mariomenutext.png");
   menuTutorialText = loadImage("menututorial.png");
   menuLevel1Text = loadImage("menulevel1.png");
@@ -278,11 +284,10 @@ void draw(){
       scale(2);
       image(menuLockerText, 340, 10);
       scale(0.7);
-      image(currentSkin, 140, 200);
-      image(currentSkin, 390, 200);
-      image(currentSkin, 640, 200);
-      image(currentSkin, 890, 200);
-      image(currentSkin, 1140, 200);
+      image(marioSkin1, 140, 200);
+      image(marioSkin2, 480, 200);
+      image(marioSkin3, 800, 200);
+      image(marioSkin4, 1120, 200);
       
     }
       
