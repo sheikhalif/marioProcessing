@@ -271,14 +271,19 @@ void draw(){
       Platform menuPlatform = new Platform();
       menuPlatform.display();
       theBackground.display();
-      scale(2);
-      image(menuLockerText, 340, 10);
-      scale(0.5);
-      image(currentSkin, 300, 300);
       fill(0);
       textFont(marioFont);
       textSize(50);
       text("Unlock new skins by scoring higher in infinite mode", 400, 180);
+      scale(2);
+      image(menuLockerText, 340, 10);
+      scale(0.7);
+      image(currentSkin, 140, 200);
+      image(currentSkin, 390, 200);
+      image(currentSkin, 640, 200);
+      image(currentSkin, 890, 200);
+      image(currentSkin, 1140, 200);
+      
     }
       
   }
