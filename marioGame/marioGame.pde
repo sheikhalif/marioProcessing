@@ -2,6 +2,7 @@ import java.util.*;
 import java.lang.*;
 
 Character mario = new Character();
+PFont marioFont;
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
 ArrayList<Environment> tutorial = new ArrayList<Environment>();
@@ -29,6 +30,7 @@ boolean[] keys = new boolean[]{false, false};
 
 void setup(){
   size(1920,1080);
+  marioFont = createFont("super_mario_rpg_font.ttf", 150);
   marioSkin1 = loadImage("marioskin1.png");
   marioMenuText = loadImage("mariomenutext.png");
   menuTutorialText = loadImage("menututorial.png");
@@ -98,13 +100,13 @@ void setTutorial(){
   tutorial.add(new killerBird(24200));
   tutorial.add(new killerBird(24300));
   tutorial.add(new killerBird(24400));
-  tutorial.add(new tutorialText(37500, "and invincibility mode. Run!!"));
+  tutorial.add(new tutorialText(37500, "and invincibility. Run!!"));
   tutorial.add(new Invincibility(38900));
   for (int i = 0; i < 170; i++){
     tutorial.add(new Spike(39400+(100*i)));
   }
   tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
-  tutorial.add(new Flag(62000));
+  tutorial.add(new Flag(61000));
 }
   
   
@@ -159,12 +161,18 @@ void mouseClicked(){
       setTutorial();
       mario.lives = 3;
       mario.dead = false;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
     }
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
       mario.dead = false;
       inMenu = true;
       menu = 0;
       mario.lives = 3;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
     }
   }
     if (levelCompleted && level == 0){
@@ -173,6 +181,9 @@ void mouseClicked(){
       level++;
       mario.dead = false;
       levelCompleted = false;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
     }
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
       mario.dead = false;
@@ -180,6 +191,9 @@ void mouseClicked(){
       inMenu = true;
       menu = 0;
       mario.lives = 3;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
     }
   }
   
@@ -257,7 +271,14 @@ void draw(){
       Platform menuPlatform = new Platform();
       menuPlatform.display();
       theBackground.display();
+      scale(2);
+      image(menuLockerText, 340, 10);
+      scale(0.5);
       image(currentSkin, 300, 300);
+      fill(0);
+      textFont(marioFont);
+      textSize(50);
+      text("Unlock new skins by scoring higher in infinite mode", 400, 180);
     }
       
   }
