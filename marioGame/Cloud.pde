@@ -19,6 +19,6 @@ public class Cloud extends backgroundItems{
   }
   
   void move(){
-    x-=(speed*0.15);
+    x-=(speed*0.1);
   }
 }
