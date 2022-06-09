@@ -1,5 +1,6 @@
 public class Flag extends Environment{
   int x;
+  boolean hit = false;
   
   public Flag(int x__){
     x = x__;
@@ -16,7 +17,8 @@ public class Flag extends Environment{
   }
   
   void check(){
-    if (x <= 200){
+    if (x <= 200 && !(hit)){
+      hit = true;
       levelCompleted = true;
     }
   }

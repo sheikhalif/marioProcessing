@@ -60,7 +60,6 @@ void setup(){
 void setTutorial(){
   tutorial.clear();
   tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
-  tutorial.add(new Flag(300));
   tutorial.add(new Spike(1200));
   tutorial.add(new Spike(1800));
   tutorial.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
@@ -105,6 +104,7 @@ void setTutorial(){
     tutorial.add(new Spike(39400+(100*i)));
   }
   tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
+  tutorial.add(new Flag(62000));
 }
   
   
@@ -120,6 +120,9 @@ void keyPressed(){
   if (keyCode == 32){
     mario.jump();
     mario.jumpStart = mario.yval;
+  }
+  if (keyCode == 75 && !(inMenu)){
+    levelCompleted = true;
   }
 }
 
@@ -159,6 +162,21 @@ void mouseClicked(){
     }
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
       mario.dead = false;
+      inMenu = true;
+      menu = 0;
+      mario.lives = 3;
+    }
+  }
+    if (levelCompleted && level == 0){
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+      mario.lives = 3;
+      level++;
+      mario.dead = false;
+      levelCompleted = false;
+    }
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+      mario.dead = false;
+      levelCompleted = false;
       inMenu = true;
       menu = 0;
       mario.lives = 3;
@@ -318,8 +336,39 @@ void draw(){
       fill(255, 0, 0);
       text("Main Menu", 840, 635);
     }
+    if (levelCompleted){
+    fill(0);
+      stroke(0,255,0);
+      strokeWeight(6);
+      rect(600, 300, 720, 480);
+      fill(0, 255, 0);
+      text("You win!", 830, 400);
+      fill(0);
+      rect(748, 450, 420, 100);
+      fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
+        fill(255);
+      }
+      rect(758, 460, 400, 80);
+      fill(0, 255, 0);
+      textSize(50);
+      text("Next level", 845, 515);
+      
+      fill(0);
+      rect(748, 570, 420, 100);
+      fill (0);
+      if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+        fill(255);
+      }
+      rect(758, 580, 400, 80);
+      fill(0, 255, 0);
+      text("Main Menu", 845, 635);
+      fill(0);
+    }
+
+
     else{
-      if (keys[0]){
+      if (keys[0] && !(mario.dead) && !(levelCompleted)){
       for (int i = 0; i < tutorial.size(); i++){
         if (tutorial.get(i).x < -150){
           tutorial.remove(tutorial.get(i));
@@ -332,7 +381,7 @@ void draw(){
     }
       
   }
-  if (keys[0] && !(mario.dead)){
+  if (keys[0] && !(mario.dead) && !(levelCompleted)){
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
       if (backgroundObjects.get(i).x < -300){
@@ -340,7 +389,6 @@ void draw(){
       }
     }
   }
-  if (
 
   fill(0);
   textSize(50);
