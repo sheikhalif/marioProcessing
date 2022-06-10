@@ -16,6 +16,9 @@ int level = -1;
 boolean levelCompleted = false;
 color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
+PImage marioSkin1damage;
+PImage marioSkin1doubleJump;
+PImage marioSkin1invincibility;
 PImage marioSkin2;
 PImage marioSkin3;
 PImage marioSkin4;
@@ -26,6 +29,10 @@ PImage menuLevel2Text;
 PImage menuLockerText;
 PImage platformSkin;
 PImage currentSkin;
+PImage currentSkinDamage;
+PImage currentSkinDoubleJump;
+PImage currentSkinInvincibility;
+color lockerHoverColor = color(207, 233, 250);
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -35,6 +42,9 @@ void setup(){
   size(1920,1080);
   marioFont = createFont("super_mario_rpg_font.ttf", 150);
   marioSkin1 = loadImage("marioskin1.png");
+  marioSkin1damage = loadImage("marioskin1damage.png");
+  marioSkin1doubleJump = loadImage("marioskin1doublejump.png");
+  marioSkin1invincibility = loadImage("marioskin1invincibility.png");
   marioSkin2 = loadImage("marioskin3.png");
   marioSkin3 = loadImage("marioskin2.png");
   marioSkin4 = loadImage("marioskin4.png");
@@ -45,6 +55,9 @@ void setup(){
   menuLockerText = loadImage("menulocker.png");
   platformSkin = loadImage("mariobrickplatform.png");
   currentSkin = marioSkin1;
+  currentSkinDamage = marioSkin1damage;
+  currentSkinDoubleJump = marioSkin1doubleJump;
+  currentSkinInvincibility = marioSkin1invincibility;
   for (int i = 0; i < 1000; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -111,7 +124,7 @@ void setTutorial(){
   for (int i = 0; i < 170; i++){
     tutorial.add(new Spike(39400+(100*i)));
   }
-  tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
+  tutorial.add(new tutorialText(57500, "And that's the game! Check out the locker to unlock new skins for Mario!"));
   tutorial.add(new Flag(61000));
 }
   
@@ -280,14 +293,31 @@ void draw(){
       fill(0);
       textFont(marioFont);
       textSize(50);
-      text("Unlock new skins by scoring higher in infinite mode", 400, 180);
       scale(2);
       image(menuLockerText, 340, 10);
       scale(0.7);
-      image(marioSkin1, 140, 200);
-      image(marioSkin2, 480, 200);
-      image(marioSkin3, 800, 200);
-      image(marioSkin4, 1120, 200);
+      fill(lockerHoverColor);
+      if (mouseX >= 140 && mouseY <= 280 && mouse
+      rect(130, 140, 120, 320);
+      rect(470, 140, 120, 320);
+      rect(790, 140, 120, 320);
+      rect(1110, 140, 120, 320);
+      image(marioSkin1, 140, 150);
+      image(marioSkin2, 480, 150);
+      image(marioSkin3, 800, 150);
+      image(marioSkin4, 1120, 150);
+      fill(255, 0, 0);
+      textSize(30);
+      text("Mario", 150, 500);
+      fill(#323E29);
+      text("GI Mario", 472, 500);
+      fill(#FFD700);
+      text("Bling Bling Mario", 740, 500);
+      fill(0);
+      text("Mr. K", 1134, 500);
+      fill(207, 233, 250);
+      
+      
       
     }
       
@@ -308,9 +338,11 @@ void draw(){
     }
   }
   if (mario.doubleJumpCountdown > 0){
+    image(currentSkinDoubleJump, 100, mario.yval);
     mario.doubleJumpCountdown--;
   }
   if (mario.invincibilityCountdown > 0){
+    image(currentSkinInvincibility, 100, mario.yval);
     mario.invincibilityCountdown--;
     if (mario.invincibilityCountdown <= 10){
       speed = 15;
@@ -328,6 +360,12 @@ void draw(){
   }
   String lives = "Lives: " + mario.lives;
   mario.display();
+  if (mario.doubleJumpCountdown > 0){
+    image(currentSkinDoubleJump, 100, mario.yval);
+  }
+  if (mario.invincibilityCountdown > 0){
+    image(currentSkinInvincibility, 100, mario.yval);
+  }
   mario.move();
   if (level == 0){
     for(int i = 0; i < tutorial.size(); i++){

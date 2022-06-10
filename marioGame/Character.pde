@@ -54,7 +54,7 @@ public class Character{
   void display(){
     fill(c);
     rect(100, yval, 100, 300);
-    image(marioSkin1, 100, yval);
+    image(currentSkin, 100, yval);
     c = color(0, 0, 0);
     if (lives <= 0){
       dead =  true;
@@ -73,5 +73,7 @@ public class Character{
   void damage(){
     if (lives > 0)lives--;
     c = color(255, 0, 0);
+    image(currentSkinDamage, 100, yval);
+    
   }
 }
