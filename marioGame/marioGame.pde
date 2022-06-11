@@ -1,3 +1,16 @@
+/**
+Cheat Codes:
+
+k (in game) : Level finished menu
+l (in game) : invincibility on/off
+k (in menu) : unlock all skins
+j (in game) : death screen
+
+**/
+
+
+
+
 import java.util.*;
 import java.lang.*;
 
@@ -5,8 +18,7 @@ Character mario = new Character();
 PFont marioFont;
 Platform grassPlatform = new Platform();
 int speed = mario.speed;
-ArrayList<Environment> tutorial = new ArrayList<Environment>();
-ArrayList<Environment> tutorialCopy = new ArrayList<Environment>();
+ArrayList<Environment> currentLevel = new ArrayList<Environment>();
 ArrayList<backgroundItems> backgroundObjects = new ArrayList<backgroundItems>();
 int backgroundObjectStartX = 600;
 float scale = 1;
@@ -14,8 +26,23 @@ boolean inMenu = true;
 int menu = 0;  
 int level = -1;
 boolean levelCompleted = false;
+boolean tutorialCompleted = false;
+boolean firstLevelCompleted = false;
+boolean secondLevelCompleted = false;
 color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
+PImage marioSkin1damage;
+PImage marioSkin1doubleJump;
+PImage marioSkin1invincibility;
+PImage marioSkin2damage;
+PImage marioSkin2doubleJump;
+PImage marioSkin2invincibility;
+PImage marioSkin3damage;
+PImage marioSkin3doubleJump;
+PImage marioSkin3invincibility;
+PImage marioSkin4damage;
+PImage marioSkin4doubleJump;
+PImage marioSkin4invincibility;
 PImage marioSkin2;
 PImage marioSkin3;
 PImage marioSkin4;
@@ -26,6 +53,11 @@ PImage menuLevel2Text;
 PImage menuLockerText;
 PImage platformSkin;
 PImage currentSkin;
+PImage currentSkinDamage;
+PImage currentSkinDoubleJump;
+PImage currentSkinInvincibility;
+PImage mainMenuText;
+color lockerHoverColor = color(207, 233, 250);
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -35,16 +67,37 @@ void setup(){
   size(1920,1080);
   marioFont = createFont("super_mario_rpg_font.ttf", 150);
   marioSkin1 = loadImage("marioskin1.png");
+  marioSkin1damage = loadImage("marioskin1damage.png");
+  marioSkin1doubleJump = loadImage("marioskin1doublejump.png");
+  marioSkin1invincibility = loadImage("marioskin1invincibility.png");
   marioSkin2 = loadImage("marioskin3.png");
+  marioSkin2damage = loadImage("marioskin3damage.png");
+  marioSkin2doubleJump = loadImage("marioskin3doublejump.png");
+  marioSkin2invincibility = loadImage("marioskin3invincibility.png");
   marioSkin3 = loadImage("marioskin2.png");
+  marioSkin3damage = loadImage("marioskin2damage.png");
+  marioSkin3doubleJump = loadImage("marioskin2doublejump.png");
+  marioSkin3invincibility = loadImage("marioskin2invincibility.png");
   marioSkin4 = loadImage("marioskin4.png");
+  marioSkin4damage = loadImage("marioskin4damage.png");
+  marioSkin4doubleJump = loadImage("marioskin4doublejump.png");
+  marioSkin4invincibility = loadImage("marioskin4invincibility.png");
   marioMenuText = loadImage("mariomenutext.png");
   menuTutorialText = loadImage("menututorial.png");
   menuLevel1Text = loadImage("menulevel1.png");
   menuLevel2Text = loadImage("menulevel2.png");
   menuLockerText = loadImage("menulocker.png");
   platformSkin = loadImage("mariobrickplatform.png");
+  mainMenuText = loadImage("mainmenutext.png");
   currentSkin = marioSkin1;
+  currentSkinDamage = marioSkin1damage;
+  currentSkinDoubleJump = marioSkin1doubleJump;
+  currentSkinInvincibility = marioSkin1invincibility;
+  }
+  
+void setBackground(){
+  backgroundObjects.clear();
+  backgroundObjectStartX = 300;
   for (int i = 0; i < 1000; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -55,64 +108,70 @@ void setup(){
     else if (rng1 == 1){
       backgroundObjects.add(new Tree(backgroundObjectStartX));
     }
-    
     backgroundObjectStartX+=rng2;
   }
   
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
-  }
+}
   
 
 void setTutorial(){
-  tutorial.clear();
-  tutorial.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
-  tutorial.add(new Spike(1200));
-  tutorial.add(new Spike(1800));
-  tutorial.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
-  tutorial.add(new tutorialText(5090, "Spikes"));
-  tutorial.add(new Spike(5120));
-  tutorial.add(new tutorialText(6000, "Spiked Balls"));
-  tutorial.add(new spikedBall(7000));
-  tutorial.add(new tutorialText(7500, "and Killer Birds. Watch out!"));
-  tutorial.add(new killerBird(2000));
-  tutorial.add(new tutorialText(14000, "There are two types of traps:"));
-  tutorial.add(new tutorialText(15500, "Poison Traps. Jump on it to see what happens!"));
-  tutorial.add(new poisonTrap(16800));
-  tutorial.add(new Spike(17700));
-  tutorial.add(new Spike(18200));
-  tutorial.add(new spikedBall(19400));
-  tutorial.add(new Spike(19900));
-  tutorial.add(new Spike(20500));
-  tutorial.add(new Spike(21000));
-  tutorial.add(new tutorialText(22800, "and Pitfalls. Don't jump!"));
-  tutorial.add(new Pitfall(23800));
-  tutorial.add(new tutorialText(24800, "Lastly, there are two power-ups:"));
-  tutorial.add(new tutorialText(26000, "Double Jump"));
-  tutorial.add(new doubleJump(27000));
-  tutorial.add(new Spike(27700));
-  tutorial.add(new Spike(27800));
-  tutorial.add(new Spike(27900));
-  tutorial.add(new Spike(28000));
-  tutorial.add(new Spike(28100));
-  tutorial.add(new Spike(28200));
-  tutorial.add(new Spike(28300));
-  tutorial.add(new spikedBall(28900));
-  tutorial.add(new spikedBall(29100));
-  tutorial.add(new spikedBall(29300));
-  tutorial.add(new killerBird(24000));
-  tutorial.add(new killerBird (24100));
-  tutorial.add(new killerBird(24200));
-  tutorial.add(new killerBird(24300));
-  tutorial.add(new killerBird(24400));
-  tutorial.add(new tutorialText(37500, "and invincibility. Run!!"));
-  tutorial.add(new Invincibility(38900));
+  currentLevel.clear();
+  currentLevel.add(new tutorialText(300, "Welcome to Mario! Move using 'd' and jump using 'space'"));
+  currentLevel.add(new Spike(1200));
+  currentLevel.add(new Spike(1800));
+  currentLevel.add(new tutorialText(2900, "There are three types of obstacles in this game: "));
+  currentLevel.add(new tutorialText(5090, "Spikes"));
+  currentLevel.add(new Spike(5120));
+  currentLevel.add(new tutorialText(6000, "Spiked Balls"));
+  currentLevel.add(new spikedBall(7000));
+  currentLevel.add(new tutorialText(7500, "and Killer Birds. Watch out!"));
+  currentLevel.add(new killerBird(2000));
+  currentLevel.add(new tutorialText(14000, "There are two types of traps:"));
+  currentLevel.add(new tutorialText(15500, "Poison Traps. Jump on it to see what happens!"));
+  currentLevel.add(new poisonTrap(16800));
+  currentLevel.add(new Spike(17700));
+  currentLevel.add(new Spike(18200));
+  currentLevel.add(new spikedBall(19400));
+  currentLevel.add(new Spike(19900));
+  currentLevel.add(new Spike(20500));
+  currentLevel.add(new Spike(21000));
+  currentLevel.add(new tutorialText(22800, "and Pitfalls. Don't jump!"));
+  currentLevel.add(new Pitfall(23800));
+  currentLevel.add(new tutorialText(24800, "Lastly, there are two power-ups:"));
+  currentLevel.add(new tutorialText(26000, "Double Jump"));
+  currentLevel.add(new doubleJump(27000));
+  currentLevel.add(new Spike(27700));
+  currentLevel.add(new Spike(27800));
+  currentLevel.add(new Spike(27900));
+  currentLevel.add(new Spike(28000));
+  currentLevel.add(new Spike(28100));
+  currentLevel.add(new Spike(28200));
+  currentLevel.add(new Spike(28300));
+  currentLevel.add(new spikedBall(28900));
+  currentLevel.add(new spikedBall(29100));
+  currentLevel.add(new spikedBall(29300));
+  currentLevel.add(new killerBird(24000));
+  currentLevel.add(new killerBird (24100));
+  currentLevel.add(new killerBird(24200));
+  currentLevel.add(new killerBird(24300));
+  currentLevel.add(new killerBird(24400));
+  currentLevel.add(new tutorialText(37500, "and invincibility. Run!!"));
+  currentLevel.add(new Invincibility(38900));
   for (int i = 0; i < 170; i++){
-    tutorial.add(new Spike(39400+(100*i)));
+    currentLevel.add(new Spike(39400+(100*i)));
   }
-  tutorial.add(new tutorialText(57500, "And that's the game! Check out infinite mode in the locker to unlock new skins for Mario!"));
-  tutorial.add(new Flag(61000));
+  currentLevel.add(new tutorialText(57500, "And that's the game! Check out the locker to unlock new skins for Mario!"));
+  currentLevel.add(new Flag(60000));
+}
+
+void setLevel1(){
+  currentLevel.clear();
+  currentLevel.add(new Spike(400));
+  currentLevel.add(new Spike(500));
+  currentLevel.add(new Spike(600));
 }
   
   
@@ -132,6 +191,24 @@ void keyPressed(){
   if (keyCode == 75 && !(inMenu)){
     levelCompleted = true;
   }
+  if (keyCode == 75 && menu==1){
+    tutorialCompleted = true;
+    firstLevelCompleted = true;
+    secondLevelCompleted = true;
+  }
+  if (keyCode == 76 && !(inMenu)){
+    if (mario.invincibilityCountdown == 0){
+      mario.invincibilityCountdown = 99999999;
+      speed = 100;
+    }
+    else{
+      mario.invincibilityCountdown = 0;
+      speed = 15;
+    }
+  }
+  if (keyCode == 74 && !(inMenu)){
+    mario.lives = 0;
+  }
 }
 
 void keyReleased(){
@@ -149,10 +226,13 @@ void mouseClicked(){
     inMenu = false;
     level = 0;
     setTutorial();
+    setBackground();
     }
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
       inMenu = false;
       level = 1;
+      setLevel1();
+      setBackground();
     }
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
       inMenu = false;
@@ -162,11 +242,20 @@ void mouseClicked(){
       menu = 1;
     }
   }
-  if (mario.dead && level == 0){
+  if (mario.dead){
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
-      setTutorial();
+      if (level == 0){
+        setTutorial();
+      }
+      else if (level == 1){
+        setLevel1();
+      }   
+      setBackground();
+      mario.yval = 600;
+      mario.trapped = false;
       mario.lives = 3;
       mario.dead = false;
+      speed = 15;
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
       mario.invincibilityCountdown = 0;
@@ -176,16 +265,21 @@ void mouseClicked(){
       inMenu = true;
       menu = 0;
       mario.lives = 3;
+      mario.yval = 600;
+      speed = 15;
+      mario.trapped = false;
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
       mario.invincibilityCountdown = 0;
     }
   }
-    if (levelCompleted && level == 0){
+    if (levelCompleted && level != 2){
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
       mario.lives = 3;
       level++;
+      setBackground();
       mario.dead = false;
+      speed = 15;
       levelCompleted = false;
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
@@ -197,9 +291,56 @@ void mouseClicked(){
       inMenu = true;
       menu = 0;
       mario.lives = 3;
+      speed = 15;
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
       mario.invincibilityCountdown = 0;
+    }
+  }
+  
+  if (levelCompleted && level == 2){
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 510 && mouseY <= 610){
+      mario.dead = false;
+      levelCompleted = false;
+      inMenu = true;
+      menu = 0;
+      mario.lives = 3;
+      speed = 15;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
+    }
+  }
+  if (menu == 1){
+    if (mouseX >= 740 && mouseX <= 1180 && mouseY >= 780 && mouseY <= 880){
+      menu = 0;
+    }
+    if (mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640){
+      currentSkin = marioSkin1;
+      currentSkinDamage = marioSkin1damage;
+      currentSkinDoubleJump = marioSkin1doubleJump;
+      currentSkinInvincibility = marioSkin1invincibility;
+    }
+    
+    if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted){
+      currentSkin = marioSkin2;
+      currentSkinDamage = marioSkin2damage;
+      currentSkinDoubleJump = marioSkin2doubleJump;
+      currentSkinInvincibility = marioSkin2invincibility;
+    }
+    
+    if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
+      currentSkin = marioSkin3;
+      currentSkinDamage = marioSkin3damage;
+      currentSkinDoubleJump = marioSkin3doubleJump;
+      currentSkinInvincibility = marioSkin3invincibility;
+    }
+    
+    if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && secondLevelCompleted){
+      currentSkin = marioSkin4;
+      currentSkinDamage = marioSkin4damage;
+      currentSkinDoubleJump = marioSkin4doubleJump;
+      currentSkinInvincibility = marioSkin4invincibility;
     }
   }
   
@@ -280,20 +421,119 @@ void draw(){
       fill(0);
       textFont(marioFont);
       textSize(50);
-      text("Unlock new skins by scoring higher in infinite mode", 400, 180);
       scale(2);
       image(menuLockerText, 340, 10);
       scale(0.7);
-      image(marioSkin1, 140, 200);
-      image(marioSkin2, 480, 200);
-      image(marioSkin3, 800, 200);
-      image(marioSkin4, 1120, 200);
+            fill(207, 233, 250);
+      if ((mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640) || currentSkin == marioSkin1){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(130, 150, 120, 320);
+      image(marioSkin1, 140, 160);
+      
+      noStroke();
+      fill(207, 233, 250);
+      if ((mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted) || currentSkin == marioSkin2){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(470, 150, 120, 320);
+      image(marioSkin2, 480, 160);
+      if (!(tutorialCompleted)){
+        fill(0);
+        rect(480, 160, 100, 300);
+        fill(255);
+        text("?", 515, 290);
+      }
+      
+      noStroke();
+      fill(207, 233, 250);
+      if ((mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted) || currentSkin == marioSkin3){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(790, 150, 120, 320);
+      image(marioSkin3, 800, 160);
+      if (!(firstLevelCompleted)){
+        fill(0);
+        rect(800, 160, 100, 300);
+        fill(255);
+        text("?", 835, 290);
+      }
+      
+      noStroke();
+      fill(207, 233, 250);
+      if ((mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && secondLevelCompleted) || currentSkin == marioSkin4){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(1110, 150, 120, 320);
+      image(marioSkin4, 1120, 160);
+      if (!(secondLevelCompleted)){
+        fill(0);
+        rect(1120, 160, 100, 300);
+        fill(255);
+        text("?", 1155, 290);
+      }
+      noStroke();
+     
+      fill(255, 0, 0);
+      textSize(30);
+      text("Mario", 150, 500);
+      if (tutorialCompleted){
+        fill(#323E29);
+        text("GI Mario", 472, 500);
+      }
+      else{
+        fill(0);
+        text("Complete tutorial", 410, 500);
+      }
+      
+      
+      if (firstLevelCompleted){
+        fill(#FFD700);
+        text("Bling Bling Mario", 740, 500);
+      }
+      else{
+        fill(0);
+        text("Complete level 1", 740, 500);
+      }
+      if (secondLevelCompleted){
+        fill(0);
+        text("Mr. K", 1134, 500);
+      }
+      else{
+        fill(0);
+        text("Complete level 2", 1060, 500);
+      }
+      scale(0.71);
+      if (mouseX >= 740 && mouseX <= 1180 && mouseY >= 780 && mouseY <= 880){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(730, 770, 460, 120);
+        noStroke();
+      }
+      
+      fill(0);
+      rect(740, 780, 440, 100);
+      fill (141, 79, 58);
+      rect(750, 790, 420, 80);
+      image(mainMenuText, 760, 805);
+      
+      
       
     }
       
   }
     
   if (!(inMenu)){
+    textFont(marioFont);
       if (mario.paranoiaCountdown > 0){
     speed = 8;
     scale(scale);
@@ -308,9 +548,11 @@ void draw(){
     }
   }
   if (mario.doubleJumpCountdown > 0){
+    image(currentSkinDoubleJump, 100, mario.yval);
     mario.doubleJumpCountdown--;
   }
   if (mario.invincibilityCountdown > 0){
+    image(currentSkinInvincibility, 100, mario.yval);
     mario.invincibilityCountdown--;
     if (mario.invincibilityCountdown <= 10){
       speed = 15;
@@ -328,13 +570,18 @@ void draw(){
   }
   String lives = "Lives: " + mario.lives;
   mario.display();
+  if (mario.doubleJumpCountdown > 0){
+    image(currentSkinDoubleJump, 100, mario.yval);
+  }
+  if (mario.invincibilityCountdown > 0){
+    image(currentSkinInvincibility, 100, mario.yval);
+  }
   mario.move();
-  if (level == 0){
-    for(int i = 0; i < tutorial.size(); i++){
-      if (tutorial.get(i).x < 1920){
-        tutorial.get(i).display();
+    for(int i = 0; i < currentLevel.size(); i++){
+      if (currentLevel.get(i).x < 1920){
+        currentLevel.get(i).display();
         if (mario.invincibilityCountdown == 0){
-          tutorial.get(i).check();
+          currentLevel.get(i).check();
         }
       }
     }
@@ -344,7 +591,8 @@ void draw(){
       strokeWeight(3);
       rect(600, 300, 720, 480);
       fill(255, 0, 0);
-      text("You died!", 815, 400);
+      textSize(80);
+      text("You died!", 800, 400);
       fill(255);
       rect(748, 450, 420, 100);
       fill (0);
@@ -373,7 +621,22 @@ void draw(){
       strokeWeight(6);
       rect(600, 300, 720, 480);
       fill(0, 255, 0);
-      text("You win!", 830, 400);
+      textSize(80);
+      text("You win!", 800, 400);
+      if (level == 2){
+        fill(0);
+        rect(748, 510, 420, 100);
+        fill (0);
+        if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 510 && mouseY <= 610){
+          fill(255);
+        }
+        rect(758, 520, 400, 80);
+        fill(0, 255, 0);
+        textSize(50);
+        text("Main Menu", 845, 575);
+        fill(0);
+      }
+      else{
       fill(0);
       rect(748, 450, 420, 100);
       fill (0);
@@ -395,23 +658,33 @@ void draw(){
       fill(0, 255, 0);
       text("Main Menu", 845, 635);
       fill(0);
+      if (level == 0){
+        tutorialCompleted = true;
+      }
+      if (level == 1){
+        firstLevelCompleted = true;
+      }
+      if (level == 2){
+        secondLevelCompleted = true;
+      }
+      }
+      
     }
 
 
     else{
       if (keys[0] && !(mario.dead) && !(levelCompleted)){
-      for (int i = 0; i < tutorial.size(); i++){
-        if (tutorial.get(i).x < -150){
-          tutorial.remove(tutorial.get(i));
+      for (int i = 0; i < currentLevel.size(); i++){
+        if (currentLevel.get(i).x < -150){
+          currentLevel.remove(currentLevel.get(i));
         }
         else{
-          tutorial.get(i).move();
+          currentLevel.get(i).move();
         }
       }
     }
     }
       
-  }
   if (keys[0] && !(mario.dead) && !(levelCompleted)){
     for (int i = 0; i < backgroundObjects.size(); i++){
       backgroundObjects.get(i).move();
