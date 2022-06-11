@@ -296,16 +296,46 @@ void draw(){
       scale(2);
       image(menuLockerText, 340, 10);
       scale(0.7);
-      fill(lockerHoverColor);
-      if (mouseX >= 140 && mouseY <= 280 && mouse
-      rect(130, 140, 120, 320);
-      rect(470, 140, 120, 320);
-      rect(790, 140, 120, 320);
-      rect(1110, 140, 120, 320);
-      image(marioSkin1, 140, 150);
-      image(marioSkin2, 480, 150);
-      image(marioSkin3, 800, 150);
-      image(marioSkin4, 1120, 150);
+            fill(207, 233, 250);
+      if (mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(130, 150, 120, 320);
+      image(marioSkin1, 140, 160);
+      
+      noStroke();
+      fill(207, 233, 250);
+      if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(470, 150, 120, 320);
+      image(marioSkin2, 480, 160);
+      
+      noStroke();
+      fill(207, 233, 250);
+      if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(790, 150, 120, 320);
+      image(marioSkin3, 800, 160);
+      
+      noStroke();
+      fill(207, 233, 250);
+      if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+      }
+      rect(1110, 150, 120, 320);
+      image(marioSkin4, 1120, 160);
+      noStroke();
+     
       fill(255, 0, 0);
       textSize(30);
       text("Mario", 150, 500);
