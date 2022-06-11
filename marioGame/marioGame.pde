@@ -14,6 +14,9 @@ boolean inMenu = true;
 int menu = 0;  
 int level = -1;
 boolean levelCompleted = false;
+boolean tutorialCompleted = false;
+boolean firstLevelCompleted = false;
+boolean secondLevelCompleted = false;
 color hoverColor = color(0, 0, 0);
 PImage marioSkin1;
 PImage marioSkin1damage;
@@ -32,6 +35,7 @@ PImage currentSkin;
 PImage currentSkinDamage;
 PImage currentSkinDoubleJump;
 PImage currentSkinInvincibility;
+PImage mainMenuText;
 color lockerHoverColor = color(207, 233, 250);
   
 Background theBackground = new Background();
@@ -54,6 +58,7 @@ void setup(){
   menuLevel2Text = loadImage("menulevel2.png");
   menuLockerText = loadImage("menulocker.png");
   platformSkin = loadImage("mariobrickplatform.png");
+  mainMenuText = loadImage("mainmenutext.png");
   currentSkin = marioSkin1;
   currentSkinDamage = marioSkin1damage;
   currentSkinDoubleJump = marioSkin1doubleJump;
@@ -145,6 +150,11 @@ void keyPressed(){
   if (keyCode == 75 && !(inMenu)){
     levelCompleted = true;
   }
+  if (keyCode == 75 && menu==1){
+    tutorialCompleted = true;
+    firstLevelCompleted = true;
+    secondLevelCompleted = true;
+  }
 }
 
 void keyReleased(){
@@ -213,6 +223,11 @@ void mouseClicked(){
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
       mario.invincibilityCountdown = 0;
+    }
+  }
+  if (menu == 1){
+    if (mouseX >= 740 && mouseX <= 1180 && mouseY >= 780 && mouseY <= 880){
+      menu = 0;
     }
   }
   
@@ -307,45 +322,96 @@ void draw(){
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640){
+      if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted){
         fill(255);
         stroke(0);
         strokeWeight(3);
       }
       rect(470, 150, 120, 320);
       image(marioSkin2, 480, 160);
+      if (!(tutorialCompleted)){
+        fill(0);
+        rect(480, 160, 100, 300);
+        fill(255);
+        text("?", 515, 290);
+      }
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640){
+      if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
         fill(255);
         stroke(0);
         strokeWeight(3);
       }
       rect(790, 150, 120, 320);
       image(marioSkin3, 800, 160);
+      if (!(firstLevelCompleted)){
+        fill(0);
+        rect(800, 160, 100, 300);
+        fill(255);
+        text("?", 835, 290);
+      }
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640){
+      if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
         fill(255);
         stroke(0);
         strokeWeight(3);
       }
       rect(1110, 150, 120, 320);
       image(marioSkin4, 1120, 160);
+      if (!(secondLevelCompleted)){
+        fill(0);
+        rect(1120, 160, 100, 300);
+        fill(255);
+        text("?", 1155, 290);
+      }
       noStroke();
      
       fill(255, 0, 0);
       textSize(30);
       text("Mario", 150, 500);
-      fill(#323E29);
-      text("GI Mario", 472, 500);
-      fill(#FFD700);
-      text("Bling Bling Mario", 740, 500);
+      if (tutorialCompleted){
+        fill(#323E29);
+        text("GI Mario", 472, 500);
+      }
+      else{
+        fill(0);
+        text("Complete tutorial", 410, 500);
+      }
+      
+      
+      if (firstLevelCompleted){
+        fill(#FFD700);
+        text("Bling Bling Mario", 740, 500);
+      }
+      else{
+        fill(0);
+        text("Complete level 1", 740, 500);
+      }
+      if (secondLevelCompleted){
+        fill(0);
+        text("Mr. K", 1134, 500);
+      }
+      else{
+        fill(0);
+        text("Complete level 2", 1060, 500);
+      }
+      scale(0.71);
+      if (mouseX >= 740 && mouseX <= 1180 && mouseY >= 780 && mouseY <= 880){
+        fill(255);
+        stroke(0);
+        strokeWeight(3);
+        rect(730, 770, 460, 120);
+        noStroke();
+      }
+      
       fill(0);
-      text("Mr. K", 1134, 500);
-      fill(207, 233, 250);
+      rect(740, 780, 440, 100);
+      fill (141, 79, 58);
+      rect(750, 790, 420, 80);
+      image(mainMenuText, 760, 805);
       
       
       
@@ -463,6 +529,7 @@ void draw(){
       fill(0, 255, 0);
       text("Main Menu", 845, 635);
       fill(0);
+      tutorialCompleted = true;
     }
 
 
