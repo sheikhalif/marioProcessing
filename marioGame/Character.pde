@@ -53,7 +53,7 @@ public class Character{
  
   void display(){
     fill(c);
-    rect(100, yval, 100, 300);
+    //rect(100, yval, 100, 300);
     image(currentSkin, 100, yval);
     c = color(0, 0, 0);
     if (lives <= 0){

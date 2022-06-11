@@ -22,6 +22,15 @@ PImage marioSkin1;
 PImage marioSkin1damage;
 PImage marioSkin1doubleJump;
 PImage marioSkin1invincibility;
+PImage marioSkin2damage;
+PImage marioSkin2doubleJump;
+PImage marioSkin2invincibility;
+PImage marioSkin3damage;
+PImage marioSkin3doubleJump;
+PImage marioSkin3invincibility;
+PImage marioSkin4damage;
+PImage marioSkin4doubleJump;
+PImage marioSkin4invincibility;
 PImage marioSkin2;
 PImage marioSkin3;
 PImage marioSkin4;
@@ -50,8 +59,17 @@ void setup(){
   marioSkin1doubleJump = loadImage("marioskin1doublejump.png");
   marioSkin1invincibility = loadImage("marioskin1invincibility.png");
   marioSkin2 = loadImage("marioskin3.png");
+  marioSkin2damage = loadImage("marioskin3damage.png");
+  marioSkin2doubleJump = loadImage("marioskin3doublejump.png");
+  marioSkin2invincibility = loadImage("marioskin3invincibility.png");
   marioSkin3 = loadImage("marioskin2.png");
+  marioSkin3damage = loadImage("marioskin2damage.png");
+  marioSkin3doubleJump = loadImage("marioskin2doublejump.png");
+  marioSkin3invincibility = loadImage("marioskin2invincibility.png");
   marioSkin4 = loadImage("marioskin4.png");
+  marioSkin4damage = loadImage("marioskin4damage.png");
+  marioSkin4doubleJump = loadImage("marioskin4doublejump.png");
+  marioSkin4invincibility = loadImage("marioskin4invincibility.png");
   marioMenuText = loadImage("mariomenutext.png");
   menuTutorialText = loadImage("menututorial.png");
   menuLevel1Text = loadImage("menulevel1.png");
@@ -63,6 +81,11 @@ void setup(){
   currentSkinDamage = marioSkin1damage;
   currentSkinDoubleJump = marioSkin1doubleJump;
   currentSkinInvincibility = marioSkin1invincibility;
+  }
+  
+void setBackground(){
+  backgroundObjects.clear();
+  backgroundObjectStartX = 300;
   for (int i = 0; i < 1000; i++){
     int rng1 = (int)(Math.random() * 2);
     int rng2 = 700 + (int)(Math.random() * 201);
@@ -73,14 +96,13 @@ void setup(){
     else if (rng1 == 1){
       backgroundObjects.add(new Tree(backgroundObjectStartX));
     }
-    
     backgroundObjectStartX+=rng2;
   }
   
   for (int i = 0; i < 40; i++){
     backgroundObjects.add(new Platform(1920*i));
   }
-  }
+}
   
 
 void setTutorial(){
@@ -172,6 +194,7 @@ void mouseClicked(){
     inMenu = false;
     level = 0;
     setTutorial();
+    setBackground();
     }
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 530 && mouseY <= 630){
       inMenu = false;
@@ -188,6 +211,9 @@ void mouseClicked(){
   if (mario.dead && level == 0){
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
       setTutorial();
+      setBackground();
+      mario.yval = 600;
+      mario.trapped = false;
       mario.lives = 3;
       mario.dead = false;
       mario.paranoiaCountdown = 0;
@@ -199,6 +225,8 @@ void mouseClicked(){
       inMenu = true;
       menu = 0;
       mario.lives = 3;
+      mario.yval = 600;
+      mario.trapped = false;
       mario.paranoiaCountdown = 0;
       mario.doubleJumpCountdown = 0;
       mario.invincibilityCountdown = 0;
@@ -228,6 +256,33 @@ void mouseClicked(){
   if (menu == 1){
     if (mouseX >= 740 && mouseX <= 1180 && mouseY >= 780 && mouseY <= 880){
       menu = 0;
+    }
+    if (mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640){
+      currentSkin = marioSkin1;
+      currentSkinDamage = marioSkin1damage;
+      currentSkinDoubleJump = marioSkin1doubleJump;
+      currentSkinInvincibility = marioSkin1invincibility;
+    }
+    
+    if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted){
+      currentSkin = marioSkin2;
+      currentSkinDamage = marioSkin2damage;
+      currentSkinDoubleJump = marioSkin2doubleJump;
+      currentSkinInvincibility = marioSkin2invincibility;
+    }
+    
+    if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
+      currentSkin = marioSkin3;
+      currentSkinDamage = marioSkin3damage;
+      currentSkinDoubleJump = marioSkin3doubleJump;
+      currentSkinInvincibility = marioSkin3invincibility;
+    }
+    
+    if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && secondLevelCompleted){
+      currentSkin = marioSkin4;
+      currentSkinDamage = marioSkin4damage;
+      currentSkinDoubleJump = marioSkin4doubleJump;
+      currentSkinInvincibility = marioSkin4invincibility;
     }
   }
   
@@ -312,7 +367,7 @@ void draw(){
       image(menuLockerText, 340, 10);
       scale(0.7);
             fill(207, 233, 250);
-      if (mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640){
+      if ((mouseX >= 190 && mouseX <= 336 && mouseY >= 220 && mouseY <= 640) || currentSkin == marioSkin1){
         fill(255);
         stroke(0);
         strokeWeight(3);
@@ -322,7 +377,7 @@ void draw(){
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted){
+      if ((mouseX >= 670 && mouseX <= 816 && mouseY >= 220 && mouseY <= 640 && tutorialCompleted) || currentSkin == marioSkin2){
         fill(255);
         stroke(0);
         strokeWeight(3);
@@ -338,7 +393,7 @@ void draw(){
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
+      if ((mouseX >= 1120 && mouseX <= 1266 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted) || currentSkin == marioSkin3){
         fill(255);
         stroke(0);
         strokeWeight(3);
@@ -354,7 +409,7 @@ void draw(){
       
       noStroke();
       fill(207, 233, 250);
-      if (mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && firstLevelCompleted){
+      if ((mouseX >= 1566 && mouseX <= 1708 && mouseY >= 220 && mouseY <= 640 && secondLevelCompleted) || currentSkin == marioSkin4){
         fill(255);
         stroke(0);
         strokeWeight(3);
