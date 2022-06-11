@@ -10,6 +10,7 @@ public class Flag extends Environment{
     stroke(0);
     strokeWeight(30);
     line(x, 400, x, 900);
+    check();
   }
   
   void move(){
