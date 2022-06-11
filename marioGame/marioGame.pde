@@ -170,6 +170,7 @@ void setTutorial(){
 void setLevel1(){
   currentLevel.clear();
   currentLevel.add(new Spike(400));
+  currentLevel.add(new Spike(500));
   currentLevel.add(new Spike(600));
 }
   
@@ -204,6 +205,9 @@ void keyPressed(){
       mario.invincibilityCountdown = 0;
       speed = 15;
     }
+  }
+  if (keyCode == 74 && !(inMenu)){
+    mario.lives = 0;
   }
 }
 
@@ -282,6 +286,20 @@ void mouseClicked(){
       mario.invincibilityCountdown = 0;
     }
     if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
+      mario.dead = false;
+      levelCompleted = false;
+      inMenu = true;
+      menu = 0;
+      mario.lives = 3;
+      speed = 15;
+      mario.paranoiaCountdown = 0;
+      mario.doubleJumpCountdown = 0;
+      mario.invincibilityCountdown = 0;
+    }
+  }
+  
+  if (levelCompleted && level == 2){
+    if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 510 && mouseY <= 610){
       mario.dead = false;
       levelCompleted = false;
       inMenu = true;
@@ -573,7 +591,8 @@ void draw(){
       strokeWeight(3);
       rect(600, 300, 720, 480);
       fill(255, 0, 0);
-      text("You died!", 815, 400);
+      textSize(80);
+      text("You died!", 800, 400);
       fill(255);
       rect(748, 450, 420, 100);
       fill (0);
@@ -604,18 +623,23 @@ void draw(){
       fill(0, 255, 0);
       textSize(80);
       text("You win!", 800, 400);
+      if (level == 2){
+        fill(0);
+        rect(748, 510, 420, 100);
+        fill (0);
+        if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 510 && mouseY <= 610){
+          fill(255);
+        }
+        rect(758, 520, 400, 80);
+        fill(0, 255, 0);
+        textSize(50);
+        text("Main Menu", 845, 575);
+        fill(0);
+      }
+      else{
       fill(0);
       rect(748, 450, 420, 100);
       fill (0);
-      if (level == 2){
-        if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 570 && mouseY <= 670){
-          fill(255);
-        }
-        rect(758, 600, 400, 80);
-        fill(0, 255, 0);
-        text("Main Menu", 845, 655);
-      }
-      else{
       if (mouseX >= 748 && mouseX <= 1168 && mouseY >= 450 && mouseY <= 550){
         fill(255);
       }
