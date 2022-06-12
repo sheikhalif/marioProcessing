@@ -5,7 +5,7 @@ j (in game) : death menu
 k (in game) : Level finished menu
 l (in game) : invincibility on/off
 k (in menu) : unlock all skins
-
+h : demo resolution
 
 **/
 
@@ -56,6 +56,7 @@ PImage currentSkinDoubleJump;
 PImage currentSkinInvincibility;
 PImage mainMenuText;
 color lockerHoverColor = color(207, 233, 250);
+boolean demoMode = false;
   
 Background theBackground = new Background();
 boolean[] keys = new boolean[]{false, false};
@@ -322,6 +323,10 @@ void keyPressed(){
   if (keyCode == 74 && !(inMenu)){
     mario.lives = 0;
   }
+  if (keyCode == 72){
+    if (demoMode)demoMode = false;
+    else {demoMode = true;}
+  }
 }
 
 void keyReleased(){
@@ -472,6 +477,9 @@ void mouseClicked(){
 
 void draw(){
   background(255);
+  if (demoMode){
+    scale(0.8);
+  }
     
   if (inMenu){
     if (menu == 0){
