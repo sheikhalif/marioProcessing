@@ -1,9 +1,11 @@
 /**
 Cheat Codes:
 
+j (in game) : death menu
 k (in game) : Level finished menu
 l (in game) : invincibility on/off
 k (in menu) : unlock all skins
+
 
 **/
 
@@ -228,6 +230,62 @@ void setLevel1(){
   currentLevel.add(new Spike(24000));
   currentLevel.add(new Flag(24500));
 }
+
+void setLevel2(){
+  currentLevel.clear();
+  currentLevel.add(new poisonTrap(300));
+  currentLevel.add(new poisonTrap(600));
+  currentLevel.add(new spikedBall(1400));
+  currentLevel.add(new spikedBall(1900));
+  currentLevel.add(new Spike(2300));
+  currentLevel.add(new Spike(2400));
+  currentLevel.add(new Spike(2700));
+  currentLevel.add(new Spike(2800));
+  currentLevel.add(new Spike(3200));
+  currentLevel.add(new Spike(3300));
+  currentLevel.add(new killerBird(1600));
+  currentLevel.add(new killerBird(1800));
+  currentLevel.add(new Spike(3800));
+  currentLevel.add(new Spike(3900));
+  currentLevel.add(new Pitfall(4300));
+  currentLevel.add(new Spike(10500));
+  currentLevel.add(new Spike(10600));
+  currentLevel.add(new Spike(10700));
+  currentLevel.add(new Invincibility(11200));
+  currentLevel.add(new Spike(11600));
+  currentLevel.add(new Spike(11700));
+  currentLevel.add(new Spike(11800));
+  for (int i = 0; i < 42; i++){
+    if (i % 2 == 0){
+      currentLevel.add(new Spike(11800 + (i * 400)));
+    }
+    else{
+      currentLevel.add(new spikedBall(11800 + (i * 400)));
+    }
+  }
+  currentLevel.add(new Pitfall(28900));
+  currentLevel.add(new Spike(29360));
+  currentLevel.add(new doubleJump(29500));
+  currentLevel.add(new killerBird(23700));
+  currentLevel.add(new killerBird(23900));
+  currentLevel.add(new killerBird(24100));
+  currentLevel.add(new killerBird(24300));
+  currentLevel.add(new Spike(29900));
+  currentLevel.add(new Spike(30000));
+  currentLevel.add(new Spike(30100));
+  currentLevel.add(new Spike(30200));
+  currentLevel.add(new Spike(30300));
+  currentLevel.add(new Spike(30400));
+  currentLevel.add(new Spike(30500));
+  currentLevel.add(new Spike(30600));
+  currentLevel.add(new Spike(30700));
+  currentLevel.add(new Spike(30800));
+  currentLevel.add(new Spike(30900));
+  currentLevel.add(new spikedBall(31300));
+  currentLevel.add(new spikedBall(31600));
+  currentLevel.add(new spikedBall(31900));
+  currentLevel.add(new Flag(37000));
+}
   
   
 
@@ -254,7 +312,7 @@ void keyPressed(){
   if (keyCode == 76 && !(inMenu)){
     if (mario.invincibilityCountdown == 0){
       mario.invincibilityCountdown = 99999999;
-      speed = 100;
+      speed = 300;
     }
     else{
       mario.invincibilityCountdown = 0;
@@ -292,6 +350,8 @@ void mouseClicked(){
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 650 && mouseY <= 750){
       inMenu = false;
       level = 2;
+      setLevel2();
+      setBackground();
     }
     if (mouseX >= 500 && mouseX <= 920 && mouseY >= 770 && mouseY <= 870){
       menu = 1;
@@ -304,7 +364,10 @@ void mouseClicked(){
       }
       else if (level == 1){
         setLevel1();
-      }   
+      }
+      else if(level == 2){
+        setLevel2();
+      }
       setBackground();
       mario.yval = 600;
       mario.trapped = false;
@@ -333,6 +396,12 @@ void mouseClicked(){
       mario.lives = 3;
       level++;
       setBackground();
+      if (level == 1){
+        setLevel1();
+      }
+      else{
+        setLevel2();
+      }
       mario.dead = false;
       speed = 15;
       levelCompleted = false;
@@ -641,6 +710,7 @@ void draw(){
       }
     }
     if (mario.dead){
+      mario.paranoiaCountdown = 0;
       fill(0);
       stroke(255, 0, 0);
       strokeWeight(3);
@@ -679,6 +749,7 @@ void draw(){
       textSize(80);
       text("You win!", 800, 400);
       if (level == 2){
+        secondLevelCompleted = true;
         fill(0);
         rect(748, 510, 420, 100);
         fill (0);
