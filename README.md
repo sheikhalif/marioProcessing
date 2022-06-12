@@ -25,4 +25,7 @@ DEVELOPMENT LOG
 6/7 : designed and implemented tutorial level and worked on death screen  
 6/8 : added functionality to death screen and did end of level screen  
 6/9 : designed new mario skins and put it in locker menu  
+6/10 : added hover animations for locker  
+6/11 : got skin selection working and cleaned up code to allow more levels  
+6/12 : designed level one and two  
 
