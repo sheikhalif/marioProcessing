@@ -4,12 +4,8 @@ Cheat Codes:
 k (in game) : Level finished menu
 l (in game) : invincibility on/off
 k (in menu) : unlock all skins
-j (in game) : death screen
 
 **/
-
-
-
 
 import java.util.*;
 import java.lang.*;
@@ -172,6 +168,65 @@ void setLevel1(){
   currentLevel.add(new Spike(400));
   currentLevel.add(new Spike(500));
   currentLevel.add(new Spike(600));
+  currentLevel.add(new spikedBall(1400));
+  currentLevel.add(new Pitfall(1600));
+  currentLevel.add(new killerBird(1700));
+  currentLevel.add(new Spike(2400));
+  currentLevel.add(new spikedBall(3700));
+  currentLevel.add(new spikedBall(4200));
+  currentLevel.add(new spikedBall(4700));
+  currentLevel.add(new spikedBall(5200));
+  currentLevel.add(new spikedBall(5700));
+  currentLevel.add(new poisonTrap(6300));
+  currentLevel.add(new Spike(6900));
+  currentLevel.add(new Spike(7000));
+  currentLevel.add(new Pitfall(7600));
+  currentLevel.add(new Spike(8600));
+  currentLevel.add(new Spike(8700));
+  currentLevel.add(new spikedBall(9500));
+  currentLevel.add(new killerBird(10000));
+  //currentLevel.add(new Invincibility(10400));
+  currentLevel.add(new Pitfall(10430));
+  currentLevel.add(new Spike(11400));
+  currentLevel.add(new spikedBall(11900));
+  currentLevel.add(new spikedBall(12400));
+  currentLevel.add(new spikedBall(12900));
+  currentLevel.add(new spikedBall(13400));
+  currentLevel.add(new spikedBall(13900));
+  currentLevel.add(new spikedBall(14400));
+  currentLevel.add(new Spike(15000));
+  currentLevel.add(new Pitfall(15400));
+  currentLevel.add(new Pitfall(15900));
+  currentLevel.add(new Pitfall(16400));
+  currentLevel.add(new Pitfall(16900));
+  currentLevel.add(new poisonTrap(17400));
+  currentLevel.add(new Spike(17900));
+  currentLevel.add(new Spike(18400));
+  currentLevel.add(new Spike(18500));
+  currentLevel.add(new Spike(19000));
+  currentLevel.add(new Spike(19100));
+  currentLevel.add(new Spike(19600));
+  currentLevel.add(new killerBird(17000));
+  currentLevel.add(new Spike(20600));
+  currentLevel.add(new Spike(20700));
+  currentLevel.add(new Spike(20800));
+  currentLevel.add(new Spike(20900));
+  currentLevel.add(new Pitfall(20100));
+  currentLevel.add(new doubleJump(20000));
+  currentLevel.add(new Spike(20600));
+  currentLevel.add(new spikedBall(21000));
+  currentLevel.add(new Spike(21500));
+  currentLevel.add(new spikedBall(22000));
+  currentLevel.add(new Spike(22400));
+  currentLevel.add(new Spike(22500));
+  currentLevel.add(new Spike(22600));
+  currentLevel.add(new Spike(23100));
+  currentLevel.add(new Spike(23200));
+  currentLevel.add(new Spike(23300));
+  currentLevel.add(new Spike(23800));
+  currentLevel.add(new Spike(23900));
+  currentLevel.add(new Spike(24000));
+  currentLevel.add(new Flag(24500));
 }
   
   

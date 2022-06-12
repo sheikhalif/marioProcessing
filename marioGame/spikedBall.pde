@@ -52,7 +52,6 @@ public class spikedBall extends Environment{
   
  
   boolean checkInFront(){
-    if (level == 0){
       for (int i = 0; i < currentLevel.size(); i++){
         if (currentLevel.get(i).getX() > 0 && currentLevel.get(i).getX() < x){
           return false;
@@ -60,6 +59,4 @@ public class spikedBall extends Environment{
       }
       return true;
     }
-    return true;
-  }
 }
